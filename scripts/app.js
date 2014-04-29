@@ -6,16 +6,14 @@ app.map = L.map('map', {
   zoom: 7,
 });
 
-app.baseMap = new app.models.TileLayer({
-  id: 'osm-basemap',
-  serviceUrl: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-  serviceType: 'WMS',
-  active: true,
-  detectRetina: true,
-});
-
 app.baseMapView = new app.views.BaseMapView({
-  model: app.baseMap
+  model: new app.models.TileLayer({
+    id: 'osm-basemap',
+    serviceUrl: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    serviceType: 'WMS',
+    active: true,
+    detectRetina: true,
+  })
 });
 
 app.baseMapView.render();

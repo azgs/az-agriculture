@@ -4,7 +4,9 @@ app.models == null ? app.models = app.models = {} : app.models = app.models;
 
 app.models.LayerModel = Backbone.Model.extend({
   defaults: {
+  	id: 'undefined',
   	serviceUrl: 'undefined',
+  	active: false,
   	detectRetina: true,
   },
   initialize: function (options) {
