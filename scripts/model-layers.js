@@ -1,12 +1,15 @@
-var app = {};
-app.models = {};
+var root = this;
+root.app == null ? app = root.app = {} : app = root.app;
+app.models == null ? app.models = app.models = {} : app.models = app.models;
 
 app.models.LayerModel = Backbone.Model.extend({
   defaults: {
   	serviceUrl: 'undefined',
   	detectRetina: true,
   },
-  initialize: function () {},
+  initialize: function (options) {
+  	this.set('layer', this.createLayer(options));
+  },
   createLayer: function (options) {},
 });
 
