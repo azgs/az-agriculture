@@ -1,7 +1,9 @@
+// Create a global object to store all logic in
 var root = this;
 root.app == null ? app = root.app = {} : app = root.app;
 app.models == null ? app.models = app.models = {} : app.models = app.models;
 
+// Model for interacting with the MapQuest routing REST API
 app.models.Route = Backbone.Model.extend({
   defaults: {
   	baseUrl: 'http://open.mapquestapi.com/directions/v2/route?',
@@ -11,6 +13,7 @@ app.models.Route = Backbone.Model.extend({
   	from: 'Tucson,AZ', // Starting point
   	to: 'Grand Canyon,AZ', // Destination
   },
+  // Construct a URL and return data from that URL
   getRoute: function (callback) {
   	var url = this.get('baseUrl')+'key='+this.get('key')+'&ambiguities='
               +this.get('ambiguities')+'&generalize='+this.get('generalize')
@@ -26,8 +29,11 @@ app.models.Route = Backbone.Model.extend({
       }
     })
   },
+  // Take the MapQuest routing response and turn it into something we can use
   processRoute: function (callback) {
+    // Call the AJAX function and get a response
     this.getRoute(function (data) {
+      // Get some of the scoped data first and make an associative array
       var routeInfo = _.map(data.route.legs, function (leg) {
         var maneuvers = _.map(leg.maneuvers, function (move) {
           return {
@@ -45,10 +51,10 @@ app.models.Route = Backbone.Model.extend({
           maneuvers: maneuvers,
         }
       });
-
+      // Get the array of total lat/lng points for the route
       var fullShape = data.route.shape.shapePoints,
           bbox = data.route.boundingBox;
-
+      // Make a two dimensional associative array out of 'fullShape'
       var shape = function (data) {
         var shapes = [];
         for (var i=0; i<data.length; i+=2) {
@@ -56,9 +62,11 @@ app.models.Route = Backbone.Model.extend({
         }
         return shapes;
       };
+      // Put the fullShape and bbox data into our object
       routeInfo[0].fullShape = shape(fullShape);
       routeInfo[0].bbox = bbox;
 
+      // Simple template for returning a single GeoJSON feature
       var makeGeoJsonFeatures = function (type, coords, props) {
         return {
           "type": "Feature",
@@ -66,7 +74,8 @@ app.models.Route = Backbone.Model.extend({
           "properties": props,
         }
       };
-
+       
+      // Return an array of GeoJSON points
       var geoJsonPoints = _.map(routeInfo[0].maneuvers, function (move) {
         var type = "Point",
             coords = [move.start.lng, move.start.lat],
@@ -79,6 +88,7 @@ app.models.Route = Backbone.Model.extend({
         return makeGeoJsonFeatures(type, coords, props);
       });
 
+      // Return a single GeoJSON line
       var geoJsonLines = makeGeoJsonFeatures(
         type = "LineString",
         coords = routeInfo[0].fullShape,
@@ -88,6 +98,7 @@ app.models.Route = Backbone.Model.extend({
         }
       );
 
+      // Final JSON object to return to the view
       var geoJSON = {
         "bbox": routeInfo[0].bbox,
         "lines": {"type": "FeatureCollection", "features": [geoJsonLines]},

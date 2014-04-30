@@ -1,7 +1,9 @@
+// Create a global object to store all logic in
 var root = this;
 root.app == null ? app = root.app = {} : app = root.app;
 app.models == null ? app.models = app.models = {} : app.models = app.models;
 
+// Base model for how we define a Leaflet layer
 app.models.LayerModel = Backbone.Model.extend({
   defaults: {
   	id: 'undefined',
@@ -15,6 +17,7 @@ app.models.LayerModel = Backbone.Model.extend({
   createLayer: function (options) {},
 });
 
+// Model for how we define a Leaflet GeoJSON layer
 app.models.GeoJSON = app.models.LayerModel.extend({
   createLayer: function (options) {
     if (options.type === 'LineString') {
@@ -23,6 +26,7 @@ app.models.GeoJSON = app.models.LayerModel.extend({
   }
 });
 
+// Model for how we define a Leaflet Tile layer
 app.models.TileLayer = app.models.LayerModel.extend({
   createLayer: function (options) {
   	if (options.serviceUrl) {
@@ -31,6 +35,7 @@ app.models.TileLayer = app.models.LayerModel.extend({
   }
 });
 
+// Base model for how we define a collection of layers
 app.models.LayerCollection = Backbone.Model.extend({
   model: app.models.LayerModel
 });
