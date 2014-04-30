@@ -7,7 +7,9 @@ app.views.RouteView = Backbone.View.extend({
   	this.route(options);
   },
   render: function () {},
-  route: function (options) {
-    this.model.getRoute(options);
+  route: function () {
+    this.model.getRoute(function (data) {
+    	console.log(data);
+    });
   }
 });
