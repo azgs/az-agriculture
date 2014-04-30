@@ -8,8 +8,8 @@ app.models.Route = Backbone.Model.extend({
   	key: 'Fmjtd%7Cluur2q01ng%2Crw%3Do5-9abxuw',
     ambiguities: 'ignore',
     generalize: '0', // Smooth out fullShape
-  	from: 'Lancaster,PA', // Starting point
-  	to: 'York,PA', // Destination
+  	from: 'Tucson,AZ', // Starting point
+  	to: 'Grand Canyon,AZ', // Destination
   },
   getRoute: function (callback) {
   	var url = this.get('baseUrl')+'key='+this.get('key')+'&ambiguities='
@@ -46,15 +46,18 @@ app.models.Route = Backbone.Model.extend({
         }
       });
 
-      var fullShape = data.route.shape.shapePoints;
+      var fullShape = data.route.shape.shapePoints,
+          bbox = data.route.boundingBox;
+
       var shape = function (data) {
         var shapes = [];
         for (var i=0; i<data.length; i+=2) {
-          shapes.push([data[i], data[i+1]])
+          shapes.push([data[i+1], data[i]])
         }
         return shapes;
       };
       routeInfo[0].fullShape = shape(fullShape);
+      routeInfo[0].bbox = bbox;
 
       var makeGeoJsonFeatures = function (type, coords, props) {
         return {
@@ -66,9 +69,7 @@ app.models.Route = Backbone.Model.extend({
 
       var geoJsonPoints = _.map(routeInfo[0].maneuvers, function (move) {
         var type = "Point",
-            coords = [move.start.lat, move.start.lng],
-            lat = move.start.lat,
-            lng = move.start.lng,
+            coords = [move.start.lng, move.start.lat],
             props = {
               "cardinal": move.cardinal,
               "distance": move.distance,
@@ -88,8 +89,9 @@ app.models.Route = Backbone.Model.extend({
       );
 
       var geoJSON = {
+        "bbox": routeInfo[0].bbox,
         "lines": {"type": "FeatureCollection", "features": [geoJsonLines]},
-        "points": {"type": "FeatureCollection", "features": [geoJsonPoints]},
+        "points": {"type": "FeatureCollection", "features": geoJsonPoints},
       }
 
       callback(geoJSON);

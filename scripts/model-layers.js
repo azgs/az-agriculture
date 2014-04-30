@@ -15,6 +15,14 @@ app.models.LayerModel = Backbone.Model.extend({
   createLayer: function (options) {},
 });
 
+app.models.GeoJSON = app.models.LayerModel.extend({
+  createLayer: function (options) {
+    if (options.type === 'LineString') {
+      return new L.geoJson(options.data)
+    }
+  }
+});
+
 app.models.TileLayer = app.models.LayerModel.extend({
   createLayer: function (options) {
   	if (options.serviceUrl) {
