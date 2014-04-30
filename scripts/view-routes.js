@@ -8,8 +8,8 @@ app.views.RouteView = Backbone.View.extend({
   },
   render: function () {},
   route: function () {
-    this.model.getRoute(function (data) {
-    	console.log(data);
+    this.model.processRoute(function (data) {
+	  console.log(data);
     });
   }
 });
