@@ -14,6 +14,8 @@ app.baseMapView = new app.views.BaseMapView({
     active: true,
     detectRetina: true,
   })
-});
+}).render();
 
-app.baseMapView.render();
+app.routeView = new app.views.RouteView({
+  model: new app.models.Route()
+}).render();
