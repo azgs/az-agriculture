@@ -11,7 +11,7 @@ app.models.Route = Backbone.Model.extend({
     ambiguities: 'ignore',
     generalize: '0', // Smooth out fullShape
   	from: 'Tucson,AZ', // Starting point
-  	to: 'Grand Canyon,AZ', // Destination
+  	to: 'Marana,AZ', // Destination
   },
   // Construct a URL and return data from that URL
   getRoute: function (callback) {
@@ -105,6 +105,7 @@ app.models.Route = Backbone.Model.extend({
         "points": {"type": "FeatureCollection", "features": geoJsonPoints},
       }
 
+      console.log(geoJSON);
       callback(geoJSON);
     })
    }
