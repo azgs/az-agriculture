@@ -21,5 +21,29 @@ app.baseMapView = new app.views.BaseMapView({
 
 // Instantiate the route model/view
 app.routeView = new app.views.RouteView({
-  model: new app.models.Route()
+  model: new app.models.Route({
+    lineOptions: {
+      style: function (feature) {
+        var lineStyle = {
+          weight: 3,
+          opacity: 1,
+          color: "red",
+        };
+        return lineStyle;
+      }
+    },
+    circleOptions: {
+      pointToLayer: function (feature, latlng) {
+        markerOptions = {
+          radius: 5,
+          fillColor: "red",
+          color: "orange",
+          weight: 3,
+          opacity: 1,
+          fillOpacity: 1,
+        }
+      return L.circleMarker(latlng, markerOptions);
+      }
+    }
+  })
 }).render();

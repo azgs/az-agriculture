@@ -13,6 +13,25 @@ app.models.Route = Backbone.Model.extend({
   	from: 'Tucson,AZ', // Starting point
   	to: 'Marana,AZ', // Destination
   },
+  initialize: function () {
+    var model = this;
+    this.createLayerGroup(function (group) {
+      group.addTo(app.map);
+      model.set("layer", group);
+    });
+  },
+  createLayerGroup: function (callback) {
+    var group = new L.layerGroup();
+    callback(group);
+  },
+  createLayers: function () {
+    var lineOptions = this.get("lineOptions"),
+        circleOptions = this.get("circleOptions"),
+        lineLayer = new L.geoJson(null, lineOptions),
+        pointLayer = new L.geoJson(null, circleOptions);
+    this.get("layer").addLayer(lineLayer);
+    this.get("layer").addLayer(pointLayer);    
+  },
   // Construct a URL and return data from that URL
   getRoute: function (callback) {
   	var url = this.get('baseUrl')+'key='+this.get('key')+'&ambiguities='
