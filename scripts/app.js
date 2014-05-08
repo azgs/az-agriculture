@@ -51,49 +51,6 @@ app.routeView = new app.views.RouteView({
   })
 }).render();
 
-// construct the suggestion engine
-var geonamesBH = new Bloodhound({
-	name: "GeoNames",
-	datumTokenizer: function (d) {
-		return Bloodhound.tokenizers.whitespace(d.name);
-	},
-	queryTokenizer: Bloodhound.tokenizers.whitespace,
-	remote: {
-		url: "http://api.geonames.org/searchJSON?username=azgs&featureClass=P&maxRows=5&country=US&name_startsWith=%QUERY",
-		filter: function (data) {
-			return $.map(data.geonames, function (result) {
-				return {
-					name: result.name + ", " + result.adminCode1,
-					lat: result.lat,
-					lng: result.lng,
-					source: "GeoNames"
-				};
-			});
-		}
-	}
-});
-
-// initialize the suggestion engine
-geonamesBH.initialize();
-
-// instantiate the typeahead UI
-$("#fromLocation").typeahead({
-	minLength: 2,
-	highlight: true,
-	hint: true
-}, {
-	name: "GeoNames",
-	displayKey: "name",
-	source: geonamesBH.ttAdapter()
-});
-	
-// instantiate the typeahead UI
-$("#toLocation").typeahead({
-	minLength: 2,
-	highlight: true,
-	hint: true
-}, {
-	name: "GeoNames",
-	displayKey: "name",
-	source: geonamesBH.ttAdapter()
-});
+app.typeaheadView = new app.views.TypeaheadView({
+	model: new app.models.Typeahead({})
+}).render();
