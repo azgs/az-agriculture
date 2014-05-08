@@ -10,6 +10,8 @@ app.models.LayerModel = Backbone.Model.extend({
   	serviceUrl: 'undefined',
   	active: false,
   	detectRetina: true,
+    isExtent: false,
+    layerOptions: 'undefined',
   },
   initialize: function (options) {
   	this.set('layer', this.createLayer(options));
@@ -18,12 +20,19 @@ app.models.LayerModel = Backbone.Model.extend({
 });
 
 // Model for how we define a Leaflet GeoJSON layer
-app.models.GeoJSON = app.models.LayerModel.extend({
-  createLayer: function (options) {
-    if (options.type === 'LineString') {
-      return new L.geoJson(options.data)
+app.models.GeoJSONLayer = app.models.LayerModel.extend({
+  createLayer: function (callback) {
+    var layer = new L.geoJson(null, this.get("layerOptions"));
+    callback(layer);
+  },
+  getJSON: function (callback) {
+    if (this.get("serviceUrl")) {
+      d3.json(this.get("serviceUrl"), function (err, data) {
+        if (err) callback(err);
+        callback(data);
+      }) 
     }
-  }
+  },
 });
 
 // Model for how we define a Leaflet Tile layer

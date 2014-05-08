@@ -2,11 +2,14 @@
 var root = this;
 root.app == null ? app = root.app = {} : app = root.app;
 
+app.maxBounds = L.latLngBounds(
+  [37.094259, -115.115688],
+  [31.282857, -108.875454]);
+
 // Make a map
 app.map = L.map('map', {
-  center: [35.024994, -111.820046],
-  zoom: 7,
-});
+  maxBounds: app.maxBounds
+}).fitBounds(app.maxBounds);
 
 // Instantiate basemap model/view
 app.baseMapView = new app.views.BaseMapView({

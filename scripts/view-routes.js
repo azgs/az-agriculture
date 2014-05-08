@@ -20,7 +20,7 @@ app.views.RouteView = Backbone.View.extend({
             bbox = data.bbox;
         linesLayer.addData(data.lines);
         pointsLayer.addData(data.points);
-        
+
         app.map.fitBounds([
           [bbox.ul.lat, bbox.ul.lng], 
           [bbox.lr.lat, bbox.lr.lng]

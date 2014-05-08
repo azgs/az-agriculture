@@ -37,15 +37,9 @@ app.models.Route = Backbone.Model.extend({
   	var url = this.get('baseUrl')+'key='+this.get('key')+'&ambiguities='
               +this.get('ambiguities')+'&generalize='+this.get('generalize')
               +'&from='+this.get('from')+'&to='+this.get('to');
-    $.ajax({
-      url: url,
-      dataType: 'json',
-      success: function (data) {
-        callback(data);
-      },
-      error: function (err) {
-        callback(err);
-      }
+    d3.json(url, function (err, data) {
+      if (err) callback(err);
+      callback(data);
     })
   },
   // Take the MapQuest routing response and turn it into something we can use
@@ -122,9 +116,8 @@ app.models.Route = Backbone.Model.extend({
         "bbox": routeInfo[0].bbox,
         "lines": {"type": "FeatureCollection", "features": [geoJsonLines]},
         "points": {"type": "FeatureCollection", "features": geoJsonPoints},
-      }
+      };
 
-      console.log(geoJSON);
       callback(geoJSON);
     })
    }
