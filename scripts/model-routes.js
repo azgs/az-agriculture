@@ -65,6 +65,7 @@ app.models.Route = Backbone.Model.extend({
   },
   // Construct a URL and return data from that URL
   getRoute: function (callback) {
+    console.log('here');
   	var url = this.get('baseUrl')+'key='+this.get('key')+'&ambiguities='
               +this.get('ambiguities')+'&generalize='+this.get('generalize')
               +'&from='+this.get('from')+'&to='+this.get('to');

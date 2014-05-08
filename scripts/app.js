@@ -9,7 +9,7 @@ app.maxBounds = L.latLngBounds(
 // Make a map
 app.map = L.map('map', {
   maxBounds: app.maxBounds
-}).fitBounds(app.maxBounds).setZoom(7);
+}).fitBounds(app.maxBounds);
 
 // Instantiate basemap model/view
 app.baseMapView = new app.views.BaseMapView({
