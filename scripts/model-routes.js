@@ -41,8 +41,8 @@ app.models.Route = Backbone.Model.extend({
   	key: 'Fmjtd%7Cluur2q01ng%2Crw%3Do5-9abxuw',
     ambiguities: 'ignore',
     generalize: '0', // Smooth out fullShape
-  	from: 'Tucson,AZ', // Starting point
-  	to: 'Marana,AZ', // Destination
+  	from: 'undefined', // Starting point
+  	to: 'undefined', // Destination
   },
   initialize: function () {
     var model = this;
