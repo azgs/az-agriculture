@@ -69,10 +69,24 @@ app.models.Route = Backbone.Model.extend({
   	var url = this.get('baseUrl')+'key='+this.get('key')+'&ambiguities='
               +this.get('ambiguities')+'&generalize='+this.get('generalize')
               +'&from='+this.get('from')+'&to='+this.get('to');
-    d3.json(url, function (err, data) {
+    /*    
+		$.ajax({
+		  url: url,
+			dataType: 'json',
+			success: function (response) {
+			  callback(response);
+			},
+			error: function (response) {
+			  callback(response);
+			}
+		})
+		*/
+
+		d3.json(url, function (err, data) {
       if (err) callback(err);
       callback(data);
     })
+
   },
   // Take the MapQuest routing response and turn it into something we can use
   processRoute: function (callback) {
