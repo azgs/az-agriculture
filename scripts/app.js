@@ -3,13 +3,13 @@ var root = this;
 root.app == null ? app = root.app = {} : app = root.app;
 
 app.maxBounds = L.latLngBounds(
-  [37.094259, -115.115688],
-  [31.282857, -108.875454]);
+  [41.9023, -121.8164],
+  [24.6870, -99.668]);
 
 // Make a map
 app.map = L.map('map', {
   maxBounds: app.maxBounds
-}).fitBounds(app.maxBounds);
+}).fitBounds(app.maxBounds).setZoom(7);
 
 // Instantiate basemap model/view
 app.baseMapView = new app.views.BaseMapView({
@@ -50,3 +50,50 @@ app.routeView = new app.views.RouteView({
     }
   })
 }).render();
+
+// construct the suggestion engine
+var geonamesBH = new Bloodhound({
+	name: "GeoNames",
+	datumTokenizer: function (d) {
+		return Bloodhound.tokenizers.whitespace(d.name);
+	},
+	queryTokenizer: Bloodhound.tokenizers.whitespace,
+	remote: {
+		url: "http://api.geonames.org/searchJSON?username=azgs&featureClass=P&maxRows=5&country=US&name_startsWith=%QUERY",
+		filter: function (data) {
+			return $.map(data.geonames, function (result) {
+				return {
+					name: result.name + ", " + result.adminCode1,
+					lat: result.lat,
+					lng: result.lng,
+					source: "GeoNames"
+				};
+			});
+		}
+	}
+});
+
+// initialize the suggestion engine
+geonamesBH.initialize();
+
+// instantiate the typeahead UI
+$("#fromLocation").typeahead({
+	minLength: 2,
+	highlight: true,
+	hint: true
+}, {
+	name: "GeoNames",
+	displayKey: "name",
+	source: geonamesBH.ttAdapter()
+});
+	
+// instantiate the typeahead UI
+$("#toLocation").typeahead({
+	minLength: 2,
+	highlight: true,
+	hint: true
+}, {
+	name: "GeoNames",
+	displayKey: "name",
+	source: geonamesBH.ttAdapter()
+});

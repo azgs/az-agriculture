@@ -5,9 +5,16 @@ app.views == null ? app.views = app.views = {} : app.views = app.views;
 
 // Render the route
 app.views.RouteView = Backbone.View.extend({
-  initialize: function (options) {
-  	this.route(options);
+  initialize: function () {
+  	var view = this;
+		$("#get-directions").submit(function(){ view.startRouting()});
   },
+	startRouting: function () {
+		$("#routesModal").modal('hide');
+		this.model.set("from", $("#fromLocation").val());
+		this.model.set("to", $("#toLocation").val());
+		this.route();
+	},
   render: function () {},
   route: function () {
     var layers = this.model.get("layer")
