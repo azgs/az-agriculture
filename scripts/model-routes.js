@@ -3,6 +3,37 @@ var root = this;
 root.app == null ? app = root.app = {} : app = root.app;
 app.models == null ? app.models = app.models = {} : app.models = app.models;
 
+// Model for getting browser location
+app.models.GeoLocate = Backbone.Model.extend({
+  defaults: {
+    active: false,
+  },
+  initialize: function () {
+    var model = this;
+    model.isGeoCompatible(function (response) {
+      if (response) {
+        model.set("active", true);
+      }
+    })
+  },
+  isGeoCompatible: function (callback) {
+    if ("geolocation" in navigator) {
+      callback(true);
+    } else {
+      callback(false);
+    }
+  },
+  getCurrentPosition: function (callback) {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      var geo = {
+        "lat": position.coords.latitude,
+        "lng": position.coords.longitude,
+      }
+      callback(geo);
+    })
+  }
+});
+
 // Model for interacting with the MapQuest routing REST API
 app.models.Route = Backbone.Model.extend({
   defaults: {
