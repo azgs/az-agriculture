@@ -26,53 +26,55 @@
 	
 	</head>
   <body>
-		<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">AZ Agriculture</a>
-			</div>
-			<div class="collapse navbar-collapse navbar-right">
-				<ul class="nav navbar-nav">
-					<li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" onclick="app.map.setView(new L.LatLng(33.891415, -111.430762), 7);"><i class="fa fa-arrows-alt"></i>&nbsp;&nbsp;Zoom To Arizona</a></li>
-					<li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" onclick="$('#routesModal').modal('show'); return false;"><i class="fa fa-road"></i>&nbsp;&nbsp;Get Directions</a></li>
-				</ul>
-			</div><!--/.nav-collapse -->
-		</div>
-	
   	<div id="map"></div>
-		
-		<div class="modal fade" id="routesModal" tabindex="-1" role="dialog">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title text-primary" id="feature-title">Get Directions</h4>
-				</div>
-				<div class="modal-body" id="feature-info">
-		<form id="get-directions">
-		<div class="form-group">
-			<label for="starting-point">Starting Point:</label>
-			<input type="text" class="form-control" id="fromLocation">
-		</div>
-		<div class="form-group">
-			<label for="destination">Destination:</label>
-			<input type="text" class="form-control" id="toLocation">
-		</div>
-		<p><br>
-			<input type="submit" class="btn btn-primary pull-right" value="Submit">
-		<br></p>
-		</form>
-		</div>
-			</div><!-- /.modal-content -->
-		</div><!-- /.modal-dialog -->
-	</div><!-- /.modal -->
-		
-		
+    <div id="content-tab" class="show-tab">
+      <div class="navbar" role="navigation">
+        <div class="navbar-header">        
+          <a class="navbar-brand" href="#">U-Pick Arizona</a>
+        </div>
+      </div>
+      <div class="navbar" role="navigcation">
+        <ul class="nav nav-pills nav-justified">
+          <li><a href="#toggle-layers" data-toggle="tab">Layers</a></li>
+          <li><a href="#get-directions" data-toggle="tab">Directions</a></li>
+          <li><a href="#download-data" data-toggle="tab">Data</a></li>  
+        </ul>
+      </div>
+      <div class="tab-content">
+        <div class="tab-pane" id="toggle-layers">
+          <ul class="nav nav-pills nav-stacked"></ul>
+        </div>
+        <div class="tab-pane" id="get-directions"></div>
+        <div class="tab-pane" id="download-data"></div>
+      </div>
+    </div>
+
+    <script id="toggle-layers-template" type="text/html">
+      <li>
+        <a id=<%= model.get("id") %> href="#"><%= model.get("layerName") %></a>
+      </li>
+    </script>
+
+    <script id="get-directions-template" type="text/html">
+      <form role="form">
+        <div class="form-group">
+          <label for="geo-start">Enter starting location</label>
+          <input type="text" class="form-control" id="geo-start" placeholder="Start">
+        </div>
+        <div class="form-group">
+          <label for="geo-destination">Enter destination</label>
+          <input type="text" class="form-control" id="geo-destination" placeholder="Destination">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+    </script>
+
+    <script id="show-directions-template" type="text/html">
+    </script>
+
+    <script id="download-data-template" type="text/html">
+    </script>
+
   	<script src="vendor/leaflet-0.7.2.js"></script>
   	<script src="vendor/jquery-1.11.0.js"></script>
 		<script src="vendor/typeahead.bundle.min.js"></script>

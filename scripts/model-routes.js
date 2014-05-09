@@ -41,8 +41,8 @@ app.models.Route = Backbone.Model.extend({
   	key: 'Fmjtd%7Cluur2q01ng%2Crw%3Do5-9abxuw',
     ambiguities: 'ignore',
     generalize: '0', // Smooth out fullShape
-  	from: 'undefined', // Starting point
-  	to: 'undefined', // Destination
+  	from: 'Tucson,AZ', // Starting point
+  	to: 'Phoenix,AZ', // Destination
   },
   initialize: function () {
     var model = this;
@@ -69,24 +69,11 @@ app.models.Route = Backbone.Model.extend({
   	var url = this.get('baseUrl')+'key='+this.get('key')+'&ambiguities='
               +this.get('ambiguities')+'&generalize='+this.get('generalize')
               +'&from='+this.get('from')+'&to='+this.get('to');
-    /*    
-		$.ajax({
-		  url: url,
-			dataType: 'json',
-			success: function (response) {
-			  callback(response);
-			},
-			error: function (response) {
-			  callback(response);
-			}
-		})
-		*/
 
 		d3.json(url, function (err, data) {
       if (err) callback(err);
       callback(data);
     })
-
   },
   // Take the MapQuest routing response and turn it into something we can use
   processRoute: function (callback) {

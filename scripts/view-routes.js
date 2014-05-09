@@ -7,12 +7,14 @@ app.views == null ? app.views = app.views = {} : app.views = app.views;
 app.views.RouteView = Backbone.View.extend({
   initialize: function () {
   	var view = this;
-		$("#get-directions").submit(function(){ view.startRouting()});
+		$("#get-directions2").click(function(){ view.startRouting()});
   },
 	startRouting: function () {
+/*
 		$("#routesModal").modal('hide');
 		this.model.set("from", $("#fromLocation").val());
 		this.model.set("to", $("#toLocation").val());
+*/
 		this.route();
 	},
   render: function () {},
