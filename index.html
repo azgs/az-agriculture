@@ -44,7 +44,22 @@
         <div class="tab-pane" id="toggle-layers">
           <ul class="nav nav-pills nav-stacked"></ul>
         </div>
-        <div class="tab-pane" id="get-directions"></div>
+        <div class="tab-pane" id="get-directions">
+          <div class="panel-group" id="contrib-accordion">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#contrib-accordion" href="#contrib-form">
+                    Contribute Form
+                  </a>
+                </h4>
+              </div>
+              <div id="contrib-form" class="panel-collapse collapse in">
+                <div class="panel-body"></div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="tab-pane" id="download-data"></div>
       </div>
     </div>
@@ -70,7 +85,28 @@
     </script>
 
     <script id="show-directions-template" type="text/html">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#contrib-accordion" href="#route-info">
+              Contribute Form
+            </a>
+          </h4>
+        </div>
+        <div id="route-info" class="panel-collapse collapse in">
+          <div class="panel-body">
+            <div class="list-group"></div>
+          </div>
+        </div>
+      </div>
     </script>
+
+    <script id="show-directions-items-template" type="text/html">
+      <li class="list-group-item">
+        <div class="list-group-item-heading"><%= data.heading %></div>
+        <p class="list-group-item-text"><%= data.tripLength %></p>
+      </li>
+    </script>    
 
     <script id="download-data-template" type="text/html">
     </script>
