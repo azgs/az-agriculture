@@ -64,11 +64,12 @@ app.models.Route = Backbone.Model.extend({
     this.get("layer").addLayer(pointLayer);    
   },
   // Construct a URL and return data from that URL
-  getRoute: function (callback) {
-    console.log('here');
-  	var url = this.get('baseUrl')+'key='+this.get('key')+'&ambiguities='
+  getRoute: function (contributeData, callback) {
+    var from = contributeData.from,
+        to = contributeData.to,
+  	    url = this.get('baseUrl')+'key='+this.get('key')+'&ambiguities='
               +this.get('ambiguities')+'&generalize='+this.get('generalize')
-              +'&from='+this.get('from')+'&to='+this.get('to');
+              +'&from='+from+'&to='+to;
 
 		d3.json(url, function (err, data) {
       if (err) callback(err);
@@ -76,9 +77,9 @@ app.models.Route = Backbone.Model.extend({
     })
   },
   // Take the MapQuest routing response and turn it into something we can use
-  processRoute: function (callback) {
+  processRoute: function (contributeData, callback) {
     // Call the AJAX function and get a response
-    this.getRoute(function (data) {
+    this.getRoute(contributeData, function (data) {
       // Get some of the scoped data first and make an associative array
       var routeInfo = _.map(data.route.legs, function (leg) {
         var maneuvers = _.map(leg.maneuvers, function (move) {

@@ -3,8 +3,8 @@ var root = this;
 root.app == null ? app = root.app = {} : app = root.app;
 
 app.maxBounds = L.latLngBounds(
-  [41.9023, -121.8164],
-  [24.6870, -99.668]);
+  [37.094259, -115.115688],
+  [31.282857, -108.875454]);
 
 // Make a map
 app.map = L.map('map', {
@@ -24,6 +24,7 @@ app.baseMapView = new app.views.BaseMapView({
 
 // Instantiate the route model/view
 app.routeView = new app.views.RouteView({
+  el: $("#get-directions").first(),
   model: new app.models.Route({
     lineOptions: {
       style: function (feature) {

@@ -7,22 +7,30 @@ app.views == null ? app.views = app.views = {} : app.views = app.views;
 app.views.RouteView = Backbone.View.extend({
   initialize: function () {
   	var view = this;
-		$("#get-directions2").click(function(){ view.startRouting()});
+    this.template = _.template($("#get-directions-template").html());
   },
-	startRouting: function () {
-/*
-		$("#routesModal").modal('hide');
-		this.model.set("from", $("#fromLocation").val());
-		this.model.set("to", $("#toLocation").val());
-*/
-		this.route();
-	},
-  render: function () {},
-  route: function () {
+  render: function () {
+    var el = this.el,
+        template = this.template;
+    return $(el).append(template());
+  },
+  events: {
+    "submit": "getDirections",
+  },
+  getDirections: function () {
+    var directions = {
+      from: $("#geo-start").val(),
+      to: $("#geo-destination").val(),
+    };
+
+    this.route(directions)
+    return false;
+  },
+  route: function (data) {
     var layers = this.model.get("layer")
     this.model.createLayers();
   	// Look into the JSON object and build GeoJSON features
-    this.model.processRoute(function (data) {
+    this.model.processRoute(data, function (data) {
       if (data) {
         var linesLayer = layers.getLayers()[0],
             pointsLayer = layers.getLayers()[1],
