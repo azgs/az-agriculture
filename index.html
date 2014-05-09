@@ -33,7 +33,7 @@
           <a class="navbar-brand" href="#">U-Pick Arizona</a>
         </div>
       </div>
-      <div class="navbar" role="navigcation">
+      <div class="navbar" role="navigation">
         <ul class="nav nav-pills nav-justified">
           <li><a href="#toggle-layers" data-toggle="tab">Layers</a></li>
           <li><a href="#get-directions" data-toggle="tab">Directions</a></li>
@@ -45,20 +45,6 @@
           <ul class="nav nav-pills nav-stacked"></ul>
         </div>
         <div class="tab-pane" id="get-directions">
-          <div class="panel-group" id="contrib-accordion">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#contrib-accordion" href="#contrib-form">
-                    Contribute Form
-                  </a>
-                </h4>
-              </div>
-              <div id="contrib-form" class="panel-collapse collapse in">
-                <div class="panel-body"></div>
-              </div>
-            </div>
-          </div>
         </div>
         <div class="tab-pane" id="download-data"></div>
       </div>
@@ -71,40 +57,37 @@
     </script>
 
     <script id="get-directions-template" type="text/html">
-      <form role="form">
-        <div class="form-group">
-          <label for="geo-start">Enter starting location</label>
-          <input type="text" class="form-control" id="geo-start" placeholder="Start">
+      <div id="contrib-form" class="panel panel-default">
+        <div class="panel-heading">
+          <div class="panel-title">Contribute Form</div>
         </div>
-        <div class="form-group">
-          <label for="geo-destination">Enter destination</label>
-          <input type="text" class="form-control" id="geo-destination" placeholder="Destination">
+        <div class="panel-body">
+          <form role="form">
+            <div class="form-group">
+              <label for="geo-start">Enter starting location</label>
+              <input type="text" class="form-control" id="geo-start" placeholder="Start">
+            </div>
+            <div class="form-group">
+              <label for="geo-destination">Enter destination</label>
+              <input type="text" class="form-control" id="geo-destination" placeholder="Destination">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
+        <div class="tab-pane" id="show-directions">
+      </div>
     </script>
 
     <script id="show-directions-template" type="text/html">
       <div class="panel panel-default">
-        <div class="panel-heading">
-          <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#contrib-accordion" href="#route-info">
-              Contribute Form
-            </a>
-          </h4>
-        </div>
-        <div id="route-info" class="panel-collapse collapse in">
-          <div class="panel-body">
-            <div class="list-group"></div>
-          </div>
-        </div>
+          <div class="list-group"></div>
       </div>
     </script>
 
     <script id="show-directions-items-template" type="text/html">
       <li class="list-group-item">
-        <div class="list-group-item-heading"><%= data.heading %></div>
-        <p class="list-group-item-text"><%= data.tripLength %></p>
+        <div class="list-group-item-heading"><%= data.text %></div>
+        <p class="list-group-item-text"><%= data.distance %></p>
       </li>
     </script>    
 

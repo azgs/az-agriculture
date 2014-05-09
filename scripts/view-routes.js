@@ -5,24 +5,26 @@ app.views == null ? app.views = app.views = {} : app.views = app.views;
 
 app.views.RouteResultsView = Backbone.View.extend({
   initialize: function () {
-    console.log(this.attributes);
     this.parentTemplate = _.template($("#show-directions-template").html());
-//    this.childTemplate = _.template($("#show-directions-items-template").html());
+    this.childTemplate = _.template($("#show-directions-items-template").html());
   },
   render: function () {
     var el = this.el;
-    return $(el).append(this.parentTemplate());
+    $(el).append(this.parentTemplate());
+    this.buildRouteTable();
   },
   buildRouteTable: function () {
-    var el = this.activeEl,
+    var el = this.el,
         data = this.attributes.features,
         template = this.childTemplate;
+
     _.each(data, function (item) {
       var itemData = {
         "text": item.properties.text,
         "time": item.properties.time,
         "distance": item.properties.distance,
-      };
+      },
+      el = $("#show-directions .list-group").first();
 
       return $(el).append(template({
         data: itemData
@@ -55,7 +57,8 @@ app.views.RouteView = Backbone.View.extend({
     return false;
   },
   route: function (data, callback) {
-    var layers = this.model.get("layer")
+    var layers = this.model.get("layer"),
+        view = this;
     this.model.createLayers();
   	// Look into the JSON object and build GeoJSON features
     this.model.processRoute(data, function (data) {
@@ -71,8 +74,10 @@ app.views.RouteView = Backbone.View.extend({
           [bbox.lr.lat, bbox.lr.lng]
         ]);
 
+        $("#show-directions .panel").remove()
+
         new app.views.RouteResultsView({
-          el: $("#contrib-accordion").first(),
+          el: $("#show-directions").first(),
           attributes: data.points,
         }).render();
       }

@@ -24,7 +24,7 @@ app.baseMapView = new app.views.BaseMapView({
 
 // Instantiate the route model/view
 app.routeView = new app.views.RouteView({
-  el: $("#contrib-form .panel-body").first(),
+  el: $("#get-directions").first(),
   model: new app.models.Route({
     lineOptions: {
       style: function (feature) {

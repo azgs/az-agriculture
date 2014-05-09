@@ -13,31 +13,30 @@ body {
   width: 100%;
 }
 
-#triangle {
-  background-color: rgb(255,255,255);
+/* Content tab */
+#content-tab {
+  background-color: #FFFFFF;
+  opacity: 0.9;
   position: absolute;
-  display: inline-block;
-  border-right: 4px;
-  border-radius: 4px 0 0 4px;
-  top: 47%;
-  left: -25px;
-  width: 25px;
-  height: 80px;
+  border-radius: 4px 4px 4px 4px;
+  right: 1%;
+  top: 1%;
+  bottom: 1%;
+  height: 98%;
+  width: 33%;
+  overflow: auto;
+  -webkit-transition: 0.5s linear;
+  -moz-transition: 0.5s linear;
+  -o-transition: 0.5s linear;
+  transition: 0.5s linear;
 }
 
-.down-triangle {
-  border-width: 20px;
-  border-style: solid;
-  border-color: transparent;
-  border-left-color: #868686;
-  border-left-color: rgba(0,0,0,0.3);
-  display: inline-block;
-  position: relative;
-  top: 8px;
-  left: 5px;
+#get-directions {
+  height: 100%;
+  max-height: 100%;
+  overflow: auto;
 }
 
-/* Custom bootstrap navbar */
 .navbar {
   margin-bottom: 0px;
 }
@@ -51,23 +50,6 @@ body {
   float: none;
 }
 
-
-
-/* Content tab */
-#content-tab {
-  background-color: #FFFFFF;
-  opacity: 0.9;
-  position: absolute;
-  border-radius: 4px 4px 4px 4px;
-  right: 1%;
-  top: 1%;
-  bottom: 1%;
-  width: 33%;
-  -webkit-transition: 0.5s linear;
-  -moz-transition: 0.5s linear;
-  -o-transition: 0.5s linear;
-  transition: 0.5s linear;
-}
 
 /* Typeahead */
 .typeahead {
