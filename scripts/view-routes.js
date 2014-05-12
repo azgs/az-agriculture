@@ -59,6 +59,7 @@ app.views.RouteView = Backbone.View.extend({
   route: function (data, callback) {
     var layers = this.model.get("layer"),
         view = this;
+    layers.clearLayers();
     this.model.createLayers();
   	// Look into the JSON object and build GeoJSON features
     this.model.processRoute(data, function (data) {

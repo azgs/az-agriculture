@@ -2,14 +2,23 @@
 var root = this;
 root.app == null ? app = root.app = {} : app = root.app;
 
-app.maxBounds = L.latLngBounds(
+app.intialExtent = L.latLngBounds(
   [37.094259, -115.115688],
   [31.282857, -108.875454]);
+
+app.maxBounds = L.latLngBounds(
+  [41.9023, -121.8164],
+  [24.6870, -99.668]);
 
 // Make a map
 app.map = L.map('map', {
   maxBounds: app.maxBounds
-}).fitBounds(app.maxBounds);
+}).fitBounds(app.intialExtent);
+
+app.centerPoint = app.map.getPixelOrigin().x;
+app.offset = app.centerPoint * 0.975;
+app.pan = app.centerPoint - app.offset;
+app.map.panBy([app.pan, 0]);
 
 // Instantiate basemap model/view
 app.baseMapView = new app.views.BaseMapView({
