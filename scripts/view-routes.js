@@ -20,6 +20,7 @@ app.views.RouteResultsView = Backbone.View.extend({
 
     _.each(data, function (item) {
       var itemData = {
+				"index": item.properties.index,
         "text": item.properties.text,
         "time": item.properties.time,
         "distance": item.properties.distance,

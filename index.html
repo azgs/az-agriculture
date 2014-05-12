@@ -59,17 +59,15 @@
     <script id="get-directions-template" type="text/html">
       <div id="contrib-form" class="panel panel-default">
         <div class="panel-heading">
-          <div class="panel-title">Contribute Form</div>
+          <div class="panel-title">Get Directions</div>
         </div>
         <div class="panel-body">
           <form role="form">
             <div class="form-group">
-              <label for="geo-start">Enter starting location</label>
-              <input type="text" class="form-control" id="geo-start" placeholder="Start">
+              <input type="text" class="form-control" id="geo-start" placeholder="Enter starting location">
             </div>
             <div class="form-group">
-              <label for="geo-destination">Enter destination</label>
-              <input type="text" class="form-control" id="geo-destination" placeholder="Destination">
+              <input type="text" class="form-control" id="geo-destination" placeholder="Enter destination">
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
           </form>
@@ -86,8 +84,9 @@
 
     <script id="show-directions-items-template" type="text/html">
       <li class="list-group-item">
-        <div class="list-group-item-heading"><%= data.text %></div>
-        <p class="list-group-item-text"><%= data.distance %></p>
+        <div class="list-group-item-heading"><%= data.index+1 %>. <%= data.text %>
+				<p class="step-detail"><%= data.distance %> mi / <%= data.time %> hrs</p></div>
+				<div style="clear: both;"></div>
       </li>
     </script>    
 

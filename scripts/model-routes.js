@@ -84,6 +84,7 @@ app.models.Route = Backbone.Model.extend({
       var routeInfo = _.map(data.route.legs, function (leg) {
         var maneuvers = _.map(leg.maneuvers, function (move) {
           return {
+						index: move.index,
             cardinal: move.directionName,
             distance: move.distance,
             time: move.formattedTime,
@@ -127,10 +128,11 @@ app.models.Route = Backbone.Model.extend({
         var type = "Point",
             coords = [move.start.lng, move.start.lat],
             props = {
+						  "index": move.index,
               "cardinal": move.cardinal,
               "distance": move.distance,
               "text": move.text,
-              "time": move.time
+              "time": move.time,
             }
         return makeGeoJsonFeatures(type, coords, props);
       });

@@ -7,8 +7,8 @@ app.views == null ? app.views = app.views = {} : app.views = app.views;
 app.views.TypeaheadView = Backbone.View.extend({
   initialize: function() {
 		var view = this;
-		view.bindTypeahead("#fromLocation");
-		view.bindTypeahead("#toLocation");
+		view.bindTypeahead("#geo-start");
+		view.bindTypeahead("#geo-destination");
 	},
 	bindTypeahead: function(ele) {
 		var suggestionEngine = this.model.get("suggestionEngine");
