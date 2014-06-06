@@ -14,14 +14,17 @@ app.models.LayerModel = Backbone.Model.extend({
     layerOptions: 'undefined',
   },
   initialize: function (options) {
-  	this.set('layer', this.createLayer(options));
+    var model = this;
+    model.createLayer(options, function (layer) {
+      model.set('layer', layer);
+    })
   },
   createLayer: function (options) {},
 });
 
 // Model for how we define a Leaflet GeoJSON layer
 app.models.GeoJSONLayer = app.models.LayerModel.extend({
-  createLayer: function (callback) {
+  createLayer: function (options, callback) {
     var layer = new L.geoJson(null, this.get("layerOptions"));
     callback(layer);
   },
@@ -37,9 +40,11 @@ app.models.GeoJSONLayer = app.models.LayerModel.extend({
 
 // Model for how we define a Leaflet Tile layer
 app.models.TileLayer = app.models.LayerModel.extend({
-  createLayer: function (options) {
-  	if (options.serviceUrl) {
-  	  return new L.tileLayer(options.serviceUrl, options);
+  createLayer: function (options, callback) {
+    var model = this;
+  	if (model.get("serviceUrl")) {
+  	  var layer = new L.tileLayer(model.get("serviceUrl"), options);
+      callback(layer);
   	}
   }
 });

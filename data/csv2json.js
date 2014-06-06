@@ -55,8 +55,8 @@ function makeChild (obj) {
   return { 
     "type": "Feature",
     "geometry": {"type": "Point", "coordinates": [
-        parseFloat(obj["latitude"]), 
-        parseFloat(obj["longitude"])
+        parseFloat(obj["Long"]), 
+        parseFloat(obj["Lat"])
       ]
     },
     "properties": {
@@ -64,8 +64,8 @@ function makeChild (obj) {
       "source": obj["Farm/Grower"],
       "street": obj["Location"],
       "area": obj["Area"],
-      "lat": parseFloat(obj["latitude"]),
-      "lon": parseFloat(obj["longitude"]),
+      "lat": parseFloat(obj["Lat"]),
+      "lon": parseFloat(obj["Long"]),
       "owner": obj["Owner"],
       "website": obj["Website"],
       "phone": obj["Contact"],
@@ -99,8 +99,8 @@ csvConverter.on("end_parsed", function (obj) {
   });
 
   var json = makeParent(featureList);
-  var writeJson = JSON.stringify(json) + ";";
-  
+  var writeJson = JSON.stringify(json);
+
   fs.writeFile(jsonPath, writeJson, function (err, res) {
     if (err) console.log(err);
     else console.log(jsonPath);

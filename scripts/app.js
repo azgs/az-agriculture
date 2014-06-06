@@ -31,6 +31,25 @@ app.baseMapView = new app.views.BaseMapView({
   })
 }).render();
 
+app.farmsView = new app.views.FarmsView({
+  el: $('#toggle-layers').first(),
+  model: new app.models.GeoJSONLayer({
+    id: 'master-layer',
+    serviceUrl: 'http://localhost:3000/farms.json',
+    serviceType: 'JSON',
+    active: true,
+    layerOptions: {
+      pointToLayer: function (f, ll) {
+        var marker = {
+          radius: 5,
+          fillColor: "blue",
+        }
+        return L.circleMarker(ll, marker);
+      }
+    },
+  })
+}).render();
+
 // Instantiate the route model/view
 app.routeView = new app.views.RouteView({
   el: $("#get-directions").first(),

@@ -35,7 +35,9 @@
       </div>
       <div class="navbar" role="navigation">
         <ul class="nav nav-pills nav-justified">
-          <li><a href="#toggle-layers" data-toggle="tab">Layers</a></li>
+          <li class="active">
+            <a href="#toggle-layers" data-toggle="tab">Layers</a>
+          </li>
           <li><a href="#get-directions" data-toggle="tab">Directions</a></li>
           <li><a href="#download-data" data-toggle="tab">Data</a></li>  
         </ul>
@@ -88,7 +90,7 @@
 				<p class="step-detail"><%= data.distance %> mi / <%= data.time %> hrs</p></div>
 				<div style="clear: both;"></div>
       </li>
-    </script>    
+    </script>
 
     <script id="download-data-template" type="text/html">
     </script>
