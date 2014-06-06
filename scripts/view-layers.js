@@ -30,7 +30,8 @@ app.views.FarmsView = Backbone.View.extend({
     }))
   },
   events: {
-    "click a": "switchLayers"
+    "click a": "switchLayers",
+    "click #all": "allLayers" ,
   },
   addToMap: function () {
     this.model.get("layer").addTo(app.map);
@@ -45,6 +46,14 @@ app.views.FarmsView = Backbone.View.extend({
         model.set("isExtent", false);
       }
     })
+  },
+  allLayers: function (e) {
+    var target = $(e.currentTarget);
+    if (target.hasClass("active")) {
+      target.removeClass("active");
+    } else {
+      target.addClass("active");
+    }
   },
   switchLayers: function (e) {
     var toggle = $(e.currentTarget).attr("id"),

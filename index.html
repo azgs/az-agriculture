@@ -43,8 +43,7 @@
         </ul>
       </div>
       <div class="tab-content">
-        <div class="tab-pane" id="toggle-layers">
-          <ul class="nav nav-pills nav-stacked"></ul>
+        <div class="tab-pane active" id="toggle-layers">
         </div>
         <div class="tab-pane" id="get-directions">
         </div>
@@ -53,9 +52,9 @@
     </div>
 
     <script id="toggle-layers-template" type="text/html">
-      <li>
-        <a id=<%= model.get("id") %> href="#"><%= model.get("layerName") %></a>
-      </li>
+      <div id="toggle-controller">
+        <button id="all" type="button" class="btn btn-primary btn-lng btn-block">All Farms</button>
+      </div>
     </script>
 
     <script id="get-directions-template" type="text/html">

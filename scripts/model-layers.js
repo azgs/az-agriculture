@@ -33,7 +33,7 @@ app.models.GeoJSONLayer = app.models.LayerModel.extend({
       d3.json(this.get("serviceUrl"), function (err, data) {
         if (err) callback(err);
         callback(data);
-      }) 
+      })
     }
   },
 });
