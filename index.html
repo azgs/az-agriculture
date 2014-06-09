@@ -54,14 +54,24 @@
     <script id="toggle-layers-template" type="text/html">
       <div id="toggle-controller">
         <div id="toggle-all">
+          Toggle all farms
           <button id="all" type="button" class="btn btn-primary btn-lng btn-block">All Farms</button>
         </div>
         <div id="toggle-crops">
-          <% _.each(data, function (layer) { %>
-            <button id=<% layer.get("id") %> type="button" class="btn btn-lng btn-block"><% layer.get("display") %></button>
-          <% }); %>
+          <div>Filter locations by crops</div>
+          <div class="btn-group-vertical">
+            <% _.each(crops, function (layer) { %>
+              <button id=<%= layer["id"] %> type="button" class="btn btn-default"><%= layer["display"] %></button>
+            <% }); %>
+          </div>
         </div>
         <div id="toggle-seasons">
+          <div>Filter locations by season</div>
+          <div class="btn-group">
+            <% _.each(seasons, function (layer) { %>
+              <button id=<%= layer["id"] %> type="button" class="btn btn-default"><%= layer["display"] %></button>
+            <% }); %>
+          </div>
         </div>
       </div>
     </script>

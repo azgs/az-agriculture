@@ -28,30 +28,40 @@ app.models.GeoJSONLayer = app.models.LayerModel.extend({
     var layer = new L.geoJson(null, this.get("layerOptions"));
     callback(layer);
   },
+  toggleSupport: function (data) {
+    var self = this;
+    var sanityCrop = [];
+    self.set('crops', []);
+    self.set('seasons', [
+      {"id": "winter", "display": "Winter", 
+        "months": ["december", "january", "february"]},
+      {"id": "spring", "display": "Spring",
+        "months": ["march", "april", "may"]},
+      {"id": "summer", "display": "Summer",
+        "months": ["june", "july", "august"]},
+      {"id": "fall", "display": "Fall",
+        "months": ["september", "november", "december"]},
+    ]);
+    _.each(data.features, function (layer) {
+      var crops = layer.properties.crop;
+      _.each(crops, function (crop) {
+        if (crop) {
+          if (_.indexOf(sanityCrop, crop.type) < 0) {
+            sanityCrop.push(crop.type);
+            var normalize = crop.type.replace(/\s/g, '').toLowerCase();
+            var item = {"id": normalize, "display": crop.type};
+            self.get('crops').push(item);
+          }
+        }
+      })
+    })
+  },
   getJSON: function (callback) {
-    var model = this;
-    if (model.get('serviceUrl')) {
-      d3.json(model.get("serviceUrl"), function (err, data) {
+    var self = this;
+    if (self.get('serviceUrl')) {
+      d3.json(self.get("serviceUrl"), function (err, data) {
         if (err) callback(err);
-/*
-        model.set('crops', []);
-        model.set('seasons', []);
-        _.each(data.features, function (layer) {
-          var crops = layer.properties.crop;
-          _.each(crops, function (crop) {
-            if (crop) {
-              if (_.indexOf(model.get('crops'), crop.type) < 0) {
-                model.get('crops').push(crop.type);
-              }
-              _.each(crop.season, function (season) {
-                if (_.indexOf(model.get('seasons'), season) < 0) {
-                  model.get('seasons').push(season);
-                }
-              })
-            }
-          })
-        })
-*/
+        self.toggleSupport(data);
         callback(data);
       })
     }

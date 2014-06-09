@@ -1,0 +1,30 @@
+{
+  "name": "az-agriculture",
+  "version": "0.0.0",
+  "description": "GUI tool to help support local agriculture in Arizona (US).",
+  "main": "server.js",
+  "dependencies": {
+    "csvtojson": "^0.3.8",
+    "express": "^4.4.1",
+    "underscore": "^1.6.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/azgs/az-agriculture.git"
+  },
+  "owner": "Arizona Geological Survey",
+  "authors": [
+    "Jessica Good Alisdairi",
+    "Adrian Sonnenschein",
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/azgs/az-agriculture/issues"
+  },
+  "homepage": "https://github.com/azgs/az-agriculture"
+}

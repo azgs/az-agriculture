@@ -25,18 +25,16 @@ app.views.FarmsView = Backbone.View.extend({
     var el = this.el,
         template = this.template,
         model = this.model;
-    $(el).append(template({
-      model: model
-    }))
   },
   events: {
     "click a": "switchLayers",
-    "click #all": "allLayers" ,
+    "click button": "toggleLayers" ,
   },
   addToMap: function () {
     this.model.get("layer").addTo(app.map);
   },
   addDataToLayer: function () {
+    var self = this;
     var model = this.model;
     var layer = model.get("layer");
     model.getJSON(function (data) {
@@ -45,9 +43,16 @@ app.views.FarmsView = Backbone.View.extend({
         app.map.fitBounds(layer);
         model.set("isExtent", false);
       }
+      var crops = model.get('crops');
+      var seasons = model.get('seasons');
+      $(self.el).append(self.template({
+        model: model,
+        crops: crops,
+        seasons: seasons,
+      }))
     })
   },
-  allLayers: function (e) {
+  toggleLayers: function (e) {
     var target = $(e.currentTarget);
     if (target.hasClass("active")) {
       target.removeClass("active");
