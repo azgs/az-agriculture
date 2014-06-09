@@ -108,6 +108,15 @@ body {
   width: 100%;
 }
 
+.btn:focus {
+  outline: none;
+  background-color: transparent;
+}
+
+.btn.active {
+  background-color: red;
+}
+
 @media (max-width: 767px){
   .url-break {
     word-break: break-all;
