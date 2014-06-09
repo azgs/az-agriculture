@@ -46,7 +46,12 @@ app.farmsView = new app.views.FarmsView({
         }
         return L.circleMarker(ll, marker);
       }
-    },
+/*
+      onEachFeature: function (f, l) {
+        var crops = l.feature.properties.crop;
+      }
+*/
+    }
   })
 }).render();
 
