@@ -104,6 +104,10 @@ body {
   border-bottom: 2px solid #333;
 }
 
+.btn-group-vertical {
+  width: 100%;
+}
+
 @media (max-width: 767px){
   .url-break {
     word-break: break-all;

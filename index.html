@@ -35,14 +35,15 @@
       </div>
       <div class="navbar" role="navigation">
         <ul class="nav nav-pills nav-justified">
-          <li><a href="#toggle-layers" data-toggle="tab">Layers</a></li>
+          <li class="active">
+            <a href="#toggle-layers" data-toggle="tab">Layers</a>
+          </li>
           <li><a href="#get-directions" data-toggle="tab">Directions</a></li>
           <li><a href="#download-data" data-toggle="tab">Data</a></li>  
         </ul>
       </div>
       <div class="tab-content">
-        <div class="tab-pane" id="toggle-layers">
-          <ul class="nav nav-pills nav-stacked"></ul>
+        <div class="tab-pane active" id="toggle-layers">
         </div>
         <div class="tab-pane" id="get-directions">
         </div>
@@ -51,9 +52,28 @@
     </div>
 
     <script id="toggle-layers-template" type="text/html">
-      <li>
-        <a id=<%= model.get("id") %> href="#"><%= model.get("layerName") %></a>
-      </li>
+      <div id="toggle-controller">
+        <div id="toggle-all">
+          Toggle all farms
+          <button id="all" type="button" class="btn btn-primary btn-lng btn-block">All Farms</button>
+        </div>
+        <div id="toggle-crops">
+          <div>Filter locations by crops</div>
+          <div class="btn-group-vertical">
+            <% _.each(crops, function (layer) { %>
+              <button id=<%= layer["id"] %> type="button" class="btn btn-default"><%= layer["display"] %></button>
+            <% }); %>
+          </div>
+        </div>
+        <div id="toggle-seasons">
+          <div>Filter locations by season</div>
+          <div class="btn-group">
+            <% _.each(seasons, function (layer) { %>
+              <button id=<%= layer["id"] %> type="button" class="btn btn-default"><%= layer["display"] %></button>
+            <% }); %>
+          </div>
+        </div>
+      </div>
     </script>
 
     <script id="get-directions-template" type="text/html">
@@ -88,7 +108,7 @@
 				<p class="step-detail"><%= data.distance %> mi / <%= data.time %> hrs</p></div>
 				<div style="clear: both;"></div>
       </li>
-    </script>    
+    </script>
 
     <script id="download-data-template" type="text/html">
     </script>

@@ -15,47 +15,50 @@ app.views.BaseMapView = Backbone.View.extend({
   }
 });
 
-app.views.DataLayerView = Backbone.View.extend({
+app.views.FarmsView = Backbone.View.extend({
   initialize: function (options) {
     this.addDataToLayer();
-    this.addToMap(this.findActiveLayers());
+    this.addToMap();
     this.template = _.template($("#toggle-layers-template").html());
   },
   render: function () {
     var el = this.el,
-        template = this.template;
-    this.collection.each(function (model) {
-      return $(el).append(template({
-        model: model
+        template = this.template,
+        model = this.model;
+  },
+  events: {
+    "click a": "switchLayers",
+    "click button": "toggleLayers" ,
+  },
+  addToMap: function () {
+    this.model.get("layer").addTo(app.map);
+  },
+  addDataToLayer: function () {
+    var self = this;
+    var model = this.model;
+    var layer = model.get("layer");
+    model.getJSON(function (data) {
+      layer.addData(data);
+      if (model.get("isExtent") && layer) {
+        app.map.fitBounds(layer);
+        model.set("isExtent", false);
+      }
+      var crops = model.get('crops');
+      var seasons = model.get('seasons');
+      $(self.el).append(self.template({
+        model: model,
+        crops: crops,
+        seasons: seasons,
       }))
     })
   },
-  events: {
-    "click a": "switchLayers"
-  },
-  findActiveLayers: function () {
-    var models = [];
-    this.collection.each(function (model) {
-      if (model.get("active")) models.push(model);
-    });
-    return models;
-  },
-  addToMap: function (models) {
-    _.each(models, function (model) {
-      model.get("layer").addTo(app.map);
-    })
-  },
-  addDataToLayer: function () {
-    this.collection.each(function (model) {
-      var layer = model.get("layer");
-      model.getJSON(function (data) {
-        layer.addData(data);
-        if (model.get("isExtent") && layer) {
-          app.map.fitBounds(layer);
-          model.set("isExtent", false);
-        }
-      })  
-    })
+  toggleLayers: function (e) {
+    var target = $(e.currentTarget);
+    if (target.hasClass("active")) {
+      target.removeClass("active");
+    } else {
+      target.addClass("active");
+    }
   },
   switchLayers: function (e) {
     var toggle = $(e.currentTarget).attr("id"),
