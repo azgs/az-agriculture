@@ -47,11 +47,11 @@ function makeParent (obj) {
 }
 
 function makeChild (obj) {
-  var crops = obj["Crop"].split(";");
+  var crops = obj["Crop"].split(";");  
   var cropSeasons = _.map(crops, function (crop) {
-    return makeCrop(crop);
+    return makeCrop(crop.trim());
   });
-
+  console.log(cropSeasons)
   return { 
     "type": "Feature",
     "geometry": {"type": "Point", "coordinates": [
