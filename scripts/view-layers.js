@@ -54,14 +54,22 @@ app.views.FarmsView = Backbone.View.extend({
     })
   },
   filterJSON: function (layer, watcher) {
+    var seasons = this.model.get('seasons');
     layer.setFilter(function (feature) {
       var crops = feature.properties.crop;
       for (i = 0; i < crops.length; i++) {
         if (crops[i]) {
           var crop = crops[i]["type"];
-          var normalize = crop.replace(/\s/g, '').toLowerCase();
-          if (watcher.indexOf(normalize) !== -1) {
+          var normalizeCrop = crop.replace(/\s/g, '').toLowerCase();
+          if (watcher.indexOf(normalizeCrop) !== -1) {
             return feature;
+          }
+          var seasons = crops[i]['seasons'];
+          for (y = 0; y < seasons.length; y++) {
+            var normalizeSeason = seasons[y].replace(/\s/g, '').toLowerCase();
+            if (watcher.indexOf(normalizeSeason) !== -1) {
+              return feature;
+            }
           }
         }
       }
@@ -70,19 +78,28 @@ app.views.FarmsView = Backbone.View.extend({
   toggleLayers: function (e) {
     var self = this;
     var layer = this.model.get('layer');
+    var crops = this.model.get('crops');
     var filter = e.currentTarget.id;
     var target = $(e.currentTarget);
+    var cropsList = []
+
+    for (var key in crops) {
+      cropsList.push(crops[key]['id']);
+    }
 
     var allID = $('#all');
     var cropsID = $("#toggle-crops button");
+    var seasonsID = $('#toggle-seasons button');
 
     if (filter === "all") {
+      self.active = [];
       if (target.hasClass("active")) {
         self.filterJSON(layer, []);
         target.removeClass("active");
       } else {
-        self.filterJSON(layer, ["lemons", "apples", "chilipeppers", "pumpkins", "medjooldates", "sweetcorn", "olives", "lavender", "honey", "romainelettuce"]);
-        $("#toggle-crops button").removeClass("active")
+        self.filterJSON(layer, cropsList);
+        cropsID.removeClass("active");
+        seasonsID.removeClass('active');
         target.addClass("active");
       }
     } else {
