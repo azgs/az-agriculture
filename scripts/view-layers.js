@@ -17,6 +17,7 @@ app.views.BaseMapView = Backbone.View.extend({
 
 app.views.FarmsView = Backbone.View.extend({
   initialize: function (options) {
+    this.active = [];
     this.addDataToLayer();
     this.addToMap();
     this.template = _.template($("#toggle-layers-template").html());
@@ -50,22 +51,57 @@ app.views.FarmsView = Backbone.View.extend({
         crops: crops,
         seasons: seasons,
       }))
-
-      layer.setFilter(function (f) {
-        var crops = f.properties.crop;
-        //return false;
-        if (f.properties["area"] === "sonoita") {
-          return f;
+    })
+  },
+  filterJSON: function (layer, watcher) {
+    layer.setFilter(function (feature) {
+      var crops = feature.properties.crop;
+      for (i = 0; i < crops.length; i++) {
+        if (crops[i]) {
+          var crop = crops[i]["type"];
+          var normalize = crop.replace(/\s/g, '').toLowerCase();
+          if (watcher.indexOf(normalize) !== -1) {
+            return feature;
+          }
         }
-      })
+      }
     })
   },
   toggleLayers: function (e) {
+    var self = this;
+    var layer = this.model.get('layer');
+    var filter = e.currentTarget.id;
     var target = $(e.currentTarget);
-    if (target.hasClass("active")) {
-      target.removeClass("active");
+
+    var allID = $('#all');
+    var cropsID = $("#toggle-crops button");
+
+    if (filter === "all") {
+      if (target.hasClass("active")) {
+        self.filterJSON(layer, []);
+        target.removeClass("active");
+      } else {
+        self.filterJSON(layer, ["lemons", "apples", "chilipeppers", "pumpkins", "medjooldates", "sweetcorn", "olives", "lavender", "honey", "romainelettuce"]);
+        $("#toggle-crops button").removeClass("active")
+        target.addClass("active");
+      }
     } else {
-      target.addClass("active");
+      if (target.hasClass("active")) {
+        var index = self.active.indexOf(filter);
+        if (index !== -1) {
+          self.active.splice(index, 1);        
+        }
+        self.filterJSON(layer, self.active);
+        target.removeClass("active");
+      } else {
+        target.addClass("active");
+        allID.removeClass("active");
+        var index = self.active.indexOf(filter);
+        if (index === -1) {
+          self.active.push(filter);
+        }
+        self.filterJSON(layer, self.active);
+      }
     }
   },
   switchLayers: function (e) {

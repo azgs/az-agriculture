@@ -2,16 +2,30 @@
 Original concept by Mapbox: 
 https://www.mapbox.com/mapbox.js/example/v1.0.0/filtering-markers/ 
 Tested with Leaflet v0.7.2.
+
+Vanilla leaflet only allows pre-filtering of json data.  This extension
+makes it possible to post-filter as well.
+
+Usage:
+
+var layer = L.filterGeoJson(data, options);
+
+layer.setFilter(function (f) {
+  return f.properties["lynyrd"] = "skynyrd";
+});
 */
 
 L.FilterGeoJSON = L.FeatureGroup.extend({
   options: {
     filter: function () { return true; },
   },
-  initialize: function (options) {
+  initialize: function (data, options) {
     L.setOptions(this, options);
     this._layers = {};
     this._style = options;
+    if (data !== null) {
+      this.setGeoJSON(data);
+    }
   },
   addJSON: function (data) {
     this.setGeoJSON(data);
@@ -34,7 +48,7 @@ L.FilterGeoJSON = L.FeatureGroup.extend({
     var f = L.Util.isArray(json) ? json : json.features,
         i, len;
     if (f) {
-      for (i = 0, len = f.length; i < len; i++) {
+      for (i = 0; i < f.length; i++) {
         if (f[i].geometries || f[i].geometry || f[i].features) {
           this.filterize(f[i]);
         }
