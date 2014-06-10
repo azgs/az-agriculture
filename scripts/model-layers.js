@@ -25,7 +25,7 @@ app.models.LayerModel = Backbone.Model.extend({
 // Model for how we define a Leaflet GeoJSON layer
 app.models.GeoJSONLayer = app.models.LayerModel.extend({
   createLayer: function (options, callback) {
-    var layer = new L.geoJson(null, this.get("layerOptions"));
+    var layer = L.filterGeoJson(this.get("layerOptions"));
     callback(layer);
   },
   toggleSupport: function (data) {
@@ -49,7 +49,7 @@ app.models.GeoJSONLayer = app.models.LayerModel.extend({
           if (_.indexOf(sanityCrop, crop.type) < 0) {
             sanityCrop.push(crop.type);
             var normalize = crop.type.replace(/\s/g, '').toLowerCase();
-            var item = {"id": normalize, "display": crop.type};
+            var item = {"id": normalize + "-ctrl", "display": crop.type};
             self.get('crops').push(item);
           }
         }

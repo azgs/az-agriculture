@@ -38,7 +38,7 @@ app.views.FarmsView = Backbone.View.extend({
     var model = this.model;
     var layer = model.get("layer");
     model.getJSON(function (data) {
-      layer.addData(data);
+      layer.addJSON(data);
       if (model.get("isExtent") && layer) {
         app.map.fitBounds(layer);
         model.set("isExtent", false);
@@ -50,6 +50,14 @@ app.views.FarmsView = Backbone.View.extend({
         crops: crops,
         seasons: seasons,
       }))
+
+      layer.setFilter(function (f) {
+        var crops = f.properties.crop;
+        //return false;
+        if (f.properties["area"] === "sonoita") {
+          return f;
+        }
+      })
     })
   },
   toggleLayers: function (e) {

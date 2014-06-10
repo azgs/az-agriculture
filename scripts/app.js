@@ -45,10 +45,11 @@ app.farmsView = new app.views.FarmsView({
           fillColor: "blue",
         }
         return L.circleMarker(ll, marker);
-      }
+      },
 /*
       onEachFeature: function (f, l) {
         var crops = l.feature.properties.crop;
+        console.log(crops);
       }
 */
     }
