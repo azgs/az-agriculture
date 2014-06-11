@@ -11,15 +11,25 @@ app.views.TypeaheadView = Backbone.View.extend({
 		view.bindTypeahead("#geo-destination");
 	},
 	bindTypeahead: function(ele) {
-		var suggestionEngine = this.model.get("suggestionEngine");
+		var suggestionEngines = this.model.get("suggestionEngines");
 		$(ele).typeahead({
 			minLength: 2,
 			highlight: true,
 			hint: true
-		}, {
+		},  {
+			name: "Farms",
+			displayKey: "name",
+			source: suggestionEngines[0].ttAdapter(),
+			templates: {
+				header: "<h4 class='typeahead-header'><img src='images/barn.png' width='20' height='20'>&nbsp;Farms</h4>"
+			}
+		}, { 
 			name: "GeoNames",
 			displayKey: "name",
-			source: suggestionEngine.ttAdapter()
-		});
+			source: suggestionEngines[1].ttAdapter(),
+			templates: {
+				header: "<h4 class='typeahead-header'><img src='images/globe.png' width='20' height='20'>&nbsp;Arizona Places</h4>"
+			}
+    });
 	}
 });

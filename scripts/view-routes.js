@@ -49,14 +49,25 @@ app.views.RouteView = Backbone.View.extend({
     "submit": "getDirections",
   },
   getDirections: function () {
-    var directions = {
-      from: $("#geo-start").val(),
-      to: $("#geo-destination").val(),
-    };
-
-    this.route(directions)
-    return false;
-  },
+		var directions = {
+			from: $("#geo-start").val(),
+			to: $("#geo-destination").val(),
+		};
+		directions.from = this.getLocation(directions.from);
+		directions.to = this.getLocation(directions.to);
+		this.route(directions);
+		return false;
+	},
+	// Get the lat/long for a selected location if the location 
+	// matches a source location in the farms.json data
+	getLocation:	function (location) {
+		farmsData = window.FarmsData.models[0].attributes.features;
+		_.each(farmsData, function(farmData) {
+			if (farmData.properties.source == location)
+				location = farmData.properties.lat + ", " + farmData.properties.lon;
+		});
+		return location;
+	},
   route: function (data, callback) {
     var layers = this.model.get("layer"),
         view = this;
@@ -83,6 +94,25 @@ app.views.RouteView = Backbone.View.extend({
           attributes: data.points,
         }).render();
       }
+			// If there was an error calculating directions
+			else {
+				var data = {
+					"points": {
+						"features": [{
+							"properties": {
+								"index": 0,
+								"text": "Unable to calculate directions.",
+								"time": "0",
+								"distance": 0
+					}}]}};
+					
+				$("#show-directions .panel").remove()
+				
+				new app.views.RouteResultsView({
+          el: $("#show-directions").first(),
+          attributes: data.points,
+        }).render();
+			}
     });
   }
 });
