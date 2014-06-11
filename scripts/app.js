@@ -10,15 +10,22 @@ app.maxBounds = L.latLngBounds(
   [41.9023, -121.8164],
   [24.6870, -99.668]);
 
-// Make a map
-app.map = L.map('map', {
-  maxBounds: app.maxBounds
-}).fitBounds(app.intialExtent);
+app.mapOptions = {
+  maxBounds: app.maxBounds,
+};
 
-app.centerPoint = app.map.getPixelOrigin().x;
-app.offset = app.centerPoint * 0.975;
-app.pan = app.centerPoint - app.offset;
-app.map.panBy([app.pan, 0]);
+app.width = window.innerWidth;
+if (app.width < 768) { app.mapOptions['zoomControl'] = false; };
+
+// Make a map
+app.map = L.map('map', app.mapOptions).fitBounds(app.intialExtent);
+
+if (app.width > 768) {
+  app.centerPoint = app.map.getPixelOrigin().x;
+  app.offset = app.centerPoint * 0.975;
+  app.pan = app.centerPoint - app.offset;
+  app.map.panBy([app.pan, 0]);  
+}
 
 // Instantiate basemap model/view
 app.baseMapView = new app.views.BaseMapView({
