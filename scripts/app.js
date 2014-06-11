@@ -2,6 +2,8 @@
 var root = this;
 root.app == null ? app = root.app = {} : app = root.app;
 
+var farmsTypeahead = [];
+
 app.intialExtent = L.latLngBounds(
   [37.094259, -115.115688],
   [31.282857, -108.875454]);
@@ -53,12 +55,16 @@ FarmsData.fetch({url: "http://localhost:3000/farms.json", success: function() {
 						fillColor: "blue",
 					}
 					return L.circleMarker(ll, marker);
+				},
+				onEachFeature: function (feature, layer) {
+					farmsTypeahead.push({
+						name: layer.feature.properties.source,
+						source: "Farms",
+						id: L.stamp(layer),
+						lat: layer.feature.geometry.coordinates[1],
+						lng: layer.feature.geometry.coordinates[0]
+					});
 				}
-	/*
-				onEachFeature: function (f, l) {
-					var crops = l.feature.properties.crop;
-				}
-	*/
 			}
 		})
 	}).render();
@@ -92,10 +98,4 @@ FarmsData.fetch({url: "http://localhost:3000/farms.json", success: function() {
 			}
 		})
 	}).render();
-
-	app.typeaheadView = new app.views.TypeaheadView({
-		model: new app.models.Typeahead({})
-	}).render();
-
 }});
-
