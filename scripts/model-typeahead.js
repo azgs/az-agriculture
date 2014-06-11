@@ -21,13 +21,13 @@ app.models.Typeahead = Backbone.Model.extend({
 			},
 			queryTokenizer: Bloodhound.tokenizers.whitespace,
 			remote: {
-				url: "http://api.geonames.org/searchJSON?username=azgs&featureClass=P&maxRows=5&country=US&name_startsWith=%QUERY",
+				url: "http://localhost:3000/farms.json",
 				filter: function (data) {
-					return $.map(data.geonames, function (result) {
+					return $.map(data.features, function (result) {
 						return {
-							name: result.name + ", " + result.adminCode1,
-							lat: result.lat,
-							lng: result.lng,
+							name: result.properties.source,
+							lat: result.properties.lat,
+							lng: result.properties.lon,
 							source: "GeoNames"
 						};
 					});
