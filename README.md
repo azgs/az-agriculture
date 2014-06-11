@@ -3,10 +3,7 @@
 
 ### Development Setup
 
-    > npm install express
-    > npm install csvtojson
-    > npm install underscore
-
+    > npm install
 
 ### Convert Farms CSV Data to JSON
 
