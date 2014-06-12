@@ -7,17 +7,23 @@ var app = express();
 var style = path.join(__dirname, "style");
 var script = path.join(__dirname, "scripts");
 var vendor = path.join(__dirname, "vendor");
+var images = path.join(__dirname, "images");
 var home = path.join(__dirname, "index.html");
 var farms = path.join(__dirname, "data", "farms.json");
 
 app.use("/style", express.static(style));
 app.use("/scripts", express.static(script));
 app.use("/vendor", express.static(vendor));
+app.use("/images", express.static(images));
 
 app.get("/", function (req, res) {
   fs.readFile(home, "utf8", function (err, text) {
     res.send(text);
   })
+});
+
+app.get("/images", function (req, res) {
+	res.send(req);
 });
 
 app.get("/farms.json", function (req, res) {

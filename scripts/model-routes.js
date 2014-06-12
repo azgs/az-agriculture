@@ -80,81 +80,86 @@ app.models.Route = Backbone.Model.extend({
   processRoute: function (contributeData, callback) {
     // Call the AJAX function and get a response
     this.getRoute(contributeData, function (data) {
-      // Get some of the scoped data first and make an associative array
-      var routeInfo = _.map(data.route.legs, function (leg) {
-        var maneuvers = _.map(leg.maneuvers, function (move) {
-          return {
-						index: move.index,
-            cardinal: move.directionName,
-            distance: move.distance,
-            time: move.formattedTime,
-            text: move.narrative,
-            start: move.startPoint,
-          }
-        });
+			if (data.info.statuscode != "0") {
+				callback(undefined);
+			}
+			else {
+				// Get some of the scoped data first and make an associative array
+				var routeInfo = _.map(data.route.legs, function (leg) {
+					var maneuvers = _.map(leg.maneuvers, function (move) {
+						return {
+							index: move.index,
+							cardinal: move.directionName,
+							distance: move.distance,
+							time: move.formattedTime,
+							text: move.narrative,
+							start: move.startPoint,
+						}
+					});
 
-        return {
-          distance: leg.distance,
-          time: leg.formattedTime,
-          maneuvers: maneuvers,
-        }
-      });
-      // Get the array of total lat/lng points for the route
-      var fullShape = data.route.shape.shapePoints,
-          bbox = data.route.boundingBox;
-      // Make a two dimensional associative array out of 'fullShape'
-      var shape = function (data) {
-        var shapes = [];
-        for (var i=0; i<data.length; i+=2) {
-          shapes.push([data[i+1], data[i]])
-        }
-        return shapes;
-      };
-      // Put the fullShape and bbox data into our object
-      routeInfo[0].fullShape = shape(fullShape);
-      routeInfo[0].bbox = bbox;
+					return {
+						distance: leg.distance,
+						time: leg.formattedTime,
+						maneuvers: maneuvers,
+					}
+				});
+				// Get the array of total lat/lng points for the route
+				var fullShape = data.route.shape.shapePoints,
+						bbox = data.route.boundingBox;
+				// Make a two dimensional associative array out of 'fullShape'
+				var shape = function (data) {
+					var shapes = [];
+					for (var i=0; i<data.length; i+=2) {
+						shapes.push([data[i+1], data[i]])
+					}
+					return shapes;
+				};
+				// Put the fullShape and bbox data into our object
+				routeInfo[0].fullShape = shape(fullShape);
+				routeInfo[0].bbox = bbox;
 
-      // Simple template for returning a single GeoJSON feature
-      var makeGeoJsonFeatures = function (type, coords, props) {
-        return {
-          "type": "Feature",
-          "geometry": {"type": type, "coordinates": coords},
-          "properties": props,
-        }
-      };
-       
-      // Return an array of GeoJSON points
-      var geoJsonPoints = _.map(routeInfo[0].maneuvers, function (move) {
-        var type = "Point",
-            coords = [move.start.lng, move.start.lat],
-            props = {
-						  "index": move.index,
-              "cardinal": move.cardinal,
-              "distance": move.distance,
-              "text": move.text,
-              "time": move.time,
-            }
-        return makeGeoJsonFeatures(type, coords, props);
-      });
+				// Simple template for returning a single GeoJSON feature
+				var makeGeoJsonFeatures = function (type, coords, props) {
+					return {
+						"type": "Feature",
+						"geometry": {"type": type, "coordinates": coords},
+						"properties": props,
+					}
+				}
+				 
+				// Return an array of GeoJSON points
+				var geoJsonPoints = _.map(routeInfo[0].maneuvers, function (move) {
+					var type = "Point",
+							coords = [move.start.lng, move.start.lat],
+							props = {
+								"index": move.index,
+								"cardinal": move.cardinal,
+								"distance": move.distance,
+								"text": move.text,
+								"time": move.time,
+							}
+					return makeGeoJsonFeatures(type, coords, props);
+				});
 
-      // Return a single GeoJSON line
-      var geoJsonLines = makeGeoJsonFeatures(
-        type = "LineString",
-        coords = routeInfo[0].fullShape,
-        props = {
-          "distance": routeInfo[0].distance,
-          "time": routeInfo[0].time,
-        }
-      );
+				// Return a single GeoJSON line
+				var geoJsonLines = makeGeoJsonFeatures(
+					type = "LineString",
+					coords = routeInfo[0].fullShape,
+					props = {
+						"distance": routeInfo[0].distance,
+						"time": routeInfo[0].time,
+					}
+				);
 
-      // Final JSON object to return to the view
-      var geoJSON = {
-        "bbox": routeInfo[0].bbox,
-        "lines": {"type": "FeatureCollection", "features": [geoJsonLines]},
-        "points": {"type": "FeatureCollection", "features": geoJsonPoints},
-      };
+				// Final JSON object to return to the view
+				var geoJSON = {
+					"bbox": routeInfo[0].bbox,
+					"lines": {"type": "FeatureCollection", "features": [geoJsonLines]},
+					"points": {"type": "FeatureCollection", "features": geoJsonPoints},
+				};
 
-      callback(geoJSON);
-    })
+				callback(geoJSON);
+			}
+		})
    }
 });

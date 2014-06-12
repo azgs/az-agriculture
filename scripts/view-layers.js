@@ -51,6 +51,11 @@ app.views.FarmsView = Backbone.View.extend({
         crops: crops,
         seasons: seasons,
       }))
+			
+			// Create the typeahead lists
+			app.typeaheadView = new app.views.TypeaheadView({
+				model: new app.models.Typeahead({})
+			}).render();
     })
   },
   filterJSON: function (layer, watcher) {
