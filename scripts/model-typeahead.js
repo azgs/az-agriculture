@@ -5,7 +5,9 @@ app.models == null ? app.models = app.models = {} : app.models = app.models;
 
 // Model for giving the user autocomplete options
 app.models.Typeahead = Backbone.Model.extend({
-  defaults: {},
+  defaults: {
+    farmsTypeahead: 'undefined',
+  },
   initialize: function(){ 
     var model = this;
     this.constructSuggestionEngine(function(response) {
@@ -17,6 +19,7 @@ app.models.Typeahead = Backbone.Model.extend({
   },
   // Construct the suggestion engine for geographical names
   constructSuggestionEngine: function(callback) {
+    var model = this;
     var geonamesBH = new Bloodhound({
       name: "GeoNames",
       datumTokenizer: function (d) {
@@ -43,7 +46,7 @@ app.models.Typeahead = Backbone.Model.extend({
         return Bloodhound.tokenizers.whitespace(d.name);
       },
       queryTokenizer: Bloodhound.tokenizers.whitespace,
-      local: farmsTypeahead,
+      local: model.get('farmsTypeahead'),
       limit: 5
     });
     callback([farmsBH, geonamesBH]);
