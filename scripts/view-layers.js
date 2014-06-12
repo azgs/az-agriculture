@@ -18,14 +18,11 @@ app.views.BaseMapView = Backbone.View.extend({
 app.views.FarmsView = Backbone.View.extend({
   initialize: function (options) {
     this.active = [];
-    this.addDataToLayer();
-    this.addToMap();
     this.template = _.template($("#toggle-layers-template").html());
+    this.addDataToLayer(this.template);
+    this.addToMap();
   },
   render: function () {
-    var el = this.el,
-        template = this.template,
-        model = this.model;
   },
   events: {
     "click a": "switchLayers",
@@ -34,29 +31,20 @@ app.views.FarmsView = Backbone.View.extend({
   addToMap: function () {
     this.model.get("layer").addTo(app.map);
   },
-  addDataToLayer: function () {
-    var self = this;
+  addDataToLayer: function (template) {
     var model = this.model;
     var layer = model.get("layer");
-    model.getJSON(function (data) {
-      layer.addJSON(data);
-      if (model.get("isExtent") && layer) {
-        app.map.fitBounds(layer);
-        model.set("isExtent", false);
-      }
-      var crops = model.get('crops');
-      var seasons = model.get('seasons');
-      $(self.el).append(self.template({
-        model: model,
-        crops: crops,
-        seasons: seasons,
-      }))
-			
-			// Create the typeahead lists
-			app.typeaheadView = new app.views.TypeaheadView({
-				model: new app.models.Typeahead({})
-			}).render();
-    })
+    var crops = model.get('crops');
+    var seasons = model.get('seasons');
+    if (model.get("isExtent") && layer) {
+      app.map.fitBounds(layer);
+      model.set("isExtent", false);
+    }
+    $(this.el).append(template({
+      model: model,
+      crops: crops,
+      seasons: seasons,
+    }))
   },
   filterJSON: function (layer, watcher) {
     var seasons = this.model.get('seasons');
