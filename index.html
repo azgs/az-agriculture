@@ -30,7 +30,7 @@
     <nav class="navbar navbar-default" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#content-tab">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -40,7 +40,7 @@
         </div>
       </div>
     </nav>
-    <div id="content-tab" class="show-tab">
+    <div id="content-tab" class="collapse navbar-collapse">
       <div class="btn-group btn-group-justified">
         <div class="btn-group">
           <button type="button" href="#toggle-layers" data-toggle="tab" class="btn btn-default active">Layers</button>
@@ -60,28 +60,7 @@
         <div class="tab-pane" id="download-data"></div>
       </div>
     </div>
-<!--
-    <div id="content-tab" class="show-tab">
-      <div class="navbar" role="navigation">
-      </div>
-      <div class="navbar" role="navigation">
-        <ul class="nav nav-pills nav-justified">
-          <li class="active">
-            <a href="#toggle-layers" data-toggle="tab">Layers</a>
-          </li>
-          <li><a href="#get-directions" data-toggle="tab">Directions</a></li>
-          <li><a href="#download-data" data-toggle="tab">Data</a></li>  
-        </ul>
-      </div>
-      <div class="tab-content">
-        <div class="tab-pane active" id="toggle-layers">
-        </div>
-        <div class="tab-pane" id="get-directions">
-        </div>
-        <div class="tab-pane" id="download-data"></div>
-      </div>
-    </div>
--->
+
     <script id="toggle-layers-template" type="text/html">
       <div id="toggle-controller">
         <div id="toggle-all">
