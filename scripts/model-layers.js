@@ -7,7 +7,7 @@ app.models == null ? app.models = app.models = {} : app.models = app.models;
 app.models.LayerModel = Backbone.Model.extend({
   defaults: {
   	id: 'undefined',
-  	serviceUrl: 'undefined',
+    data: 'undefined',
   	active: false,
   	detectRetina: true,
     isExtent: false,
@@ -17,7 +17,7 @@ app.models.LayerModel = Backbone.Model.extend({
     var model = this;
     model.createLayer(options, function (layer) {
       model.set('layer', layer);
-    })
+    });
   },
   createLayer: function (options) {},
 });
@@ -25,7 +25,10 @@ app.models.LayerModel = Backbone.Model.extend({
 // Model for how we define a Leaflet GeoJSON layer
 app.models.GeoJSONLayer = app.models.LayerModel.extend({
   createLayer: function (options, callback) {
-    var layer = L.filterGeoJson(null, this.get("layerOptions"));
+    var data = this.get('data');
+    var layerOptions = this.get('layerOptions');
+    var layer = L.filterGeoJson(data, layerOptions);
+    this.toggleSupport(data);
     callback(layer);
   },
   toggleSupport: function (data) {
@@ -55,16 +58,6 @@ app.models.GeoJSONLayer = app.models.LayerModel.extend({
         }
       })
     })
-  },
-  getJSON: function (callback) {
-    var self = this;
-    if (self.get('serviceUrl')) {
-      d3.json(self.get("serviceUrl"), function (err, data) {
-        if (err) callback(err);
-        self.toggleSupport(data);
-        callback(data);
-      })
-    }
   },
 });
 

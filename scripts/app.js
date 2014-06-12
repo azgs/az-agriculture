@@ -2,6 +2,8 @@
 var root = this;
 root.app == null ? app = root.app = {} : app = root.app;
 
+app.serviceUrl = "http://localhost:3000/farms.json";
+
 var farmsTypeahead = [];
 
 app.intialExtent = L.latLngBounds(
@@ -40,69 +42,67 @@ app.baseMapView = new app.views.BaseMapView({
   })
 }).render();
 
-window.FarmsData = Backbone.Model.extend({
-});
-window.FarmsData = Backbone.Collection.extend({
-	model: FarmsData, 
-});
-window.FarmsData = new FarmsData();
-FarmsData.fetch({url: "http://localhost:3000/farms.json", success: function() {
-
-	app.farmsView = new app.views.FarmsView({
-		el: $('#toggle-layers').first(),
-		model: new app.models.GeoJSONLayer({
-			id: 'master-layer',
-			serviceUrl: 'http://localhost:3000/farms.json',
-			serviceType: 'JSON',
-			active: true,
-			layerOptions: {
-				pointToLayer: function (f, ll) {
-					var marker = {
-						radius: 5,
-						fillColor: "blue",
-					}
-					return L.circleMarker(ll, marker);
-				},
-				onEachFeature: function (feature, layer) {
-					farmsTypeahead.push({
-						name: layer.feature.properties.source,
-						source: "Farms",
-						id: L.stamp(layer),
-						lat: layer.feature.geometry.coordinates[1],
-						lng: layer.feature.geometry.coordinates[0]
-					});
-				}
+app.routeView = new app.views.RouteView({
+	el: $("#get-directions").first(),
+	model: new app.models.Route({
+		lineOptions: {
+			style: function (feature) {
+				var lineStyle = {
+					weight: 3,
+					opacity: 1,
+					color: "red",
+				};
+				return lineStyle;
 			}
-		})
-	}).render();
-
-	// Instantiate the route model/view
-	app.routeView = new app.views.RouteView({
-		el: $("#get-directions").first(),
-		model: new app.models.Route({
-			lineOptions: {
-				style: function (feature) {
-					var lineStyle = {
-						weight: 3,
-						opacity: 1,
-						color: "red",
-					};
-					return lineStyle;
+		},
+		circleOptions: {
+			pointToLayer: function (feature, latlng) {
+				markerOptions = {
+					radius: 5,
+					fillColor: "red",
+					color: "orange",
+					weight: 3,
+					opacity: 1,
+					fillOpacity: 1,
 				}
-			},
-			circleOptions: {
-				pointToLayer: function (feature, latlng) {
-					markerOptions = {
-						radius: 5,
-						fillColor: "red",
-						color: "orange",
-						weight: 3,
-						opacity: 1,
-						fillOpacity: 1,
-					}
-				return L.circleMarker(latlng, markerOptions);
-				}
+			return L.circleMarker(latlng, markerOptions);
 			}
-		})
-	}).render();
-}});
+		}
+	})
+}).render();
+
+d3.json(app.serviceUrl, function (err, res) {
+	if (err) console.log(err);
+	if (res) {
+		app.farmsView = new app.views.FarmsView({
+			el: $('#toggle-layers').first(),
+			model: new app.models.GeoJSONLayer({
+				id: 'master-layer',
+				data: res,
+				active: true,
+				layerOptions: {
+					pointToLayer: function (f, ll) {
+						var marker = {
+							radius: 5,
+							fillColor: "blue",
+						}
+						return L.circleMarker(ll, marker);
+					},
+					onEachFeature: function (feature, layer) {
+						farmsTypeahead.push({
+							name: layer.feature.properties.source,
+							source: "Farms",
+							id: L.stamp(layer),
+							lat: layer.feature.geometry.coordinates[1],
+							lng: layer.feature.geometry.coordinates[0]
+						});
+					}
+				}
+			})
+		}).render();
+				
+		app.typeaheadView = new app.views.TypeaheadView({
+		  model: new app.models.Typeahead({})
+		}).render();		
+	}
+});
