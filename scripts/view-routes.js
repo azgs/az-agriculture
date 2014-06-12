@@ -61,7 +61,7 @@ app.views.RouteView = Backbone.View.extend({
 	// Get the lat/long for a selected location if the location 
 	// matches a source location in the farms.json data
 	getLocation:	function (location) {
-		farmsData = window.FarmsData.models[0].attributes.features;
+		farmsData = this.model.get('farmsData').features;
 		_.each(farmsData, function(farmData) {
 			if (farmData.properties.source == location)
 				location = farmData.properties.lat + ", " + farmData.properties.lon;

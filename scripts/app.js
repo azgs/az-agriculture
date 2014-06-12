@@ -40,35 +40,6 @@ app.baseMapView = new app.views.BaseMapView({
   })
 }).render();
 
-app.routeView = new app.views.RouteView({
-  el: $("#get-directions").first(),
-  model: new app.models.Route({
-    lineOptions: {
-      style: function (feature) {
-        var lineStyle = {
-          weight: 3,
-          opacity: 1,
-          color: "red",
-        };
-        return lineStyle;
-      }
-    },
-    circleOptions: {
-      pointToLayer: function (feature, latlng) {
-        markerOptions = {
-          radius: 5,
-          fillColor: "red",
-          color: "orange",
-          weight: 3,
-          opacity: 1,
-          fillOpacity: 1,
-        }
-      return L.circleMarker(latlng, markerOptions);
-      }
-    }
-  })
-}).render();
-
 d3.json(app.serviceUrl, function (err, res) {
   if (err) console.log(err);
   if (res) {
@@ -90,10 +61,41 @@ d3.json(app.serviceUrl, function (err, res) {
       })
     }).render();
 
+  app.routeView = new app.views.RouteView({
+    el: $("#get-directions").first(),
+    model: new app.models.Route({
+      farmsData: res,
+      lineOptions: {
+        style: function (feature) {
+          var lineStyle = {
+            weight: 3,
+            opacity: 1,
+            color: "red",
+          };
+          return lineStyle;
+        }
+      },
+      circleOptions: {
+        pointToLayer: function (feature, latlng) {
+          markerOptions = {
+            radius: 5,
+            fillColor: "red",
+            color: "orange",
+            weight: 3,
+            opacity: 1,
+            fillOpacity: 1,
+          }
+        return L.circleMarker(latlng, markerOptions);
+        }
+      }
+    })
+  }).render();
+
     var farmsTypeahead = _.map(res.features, function (f) {
       return {
         name: f.properties.source,
         source: 'Farms',
+
         lat: f.geometry.coordinates[1],
         lng: f.geometry.coordinates[0],
       }
