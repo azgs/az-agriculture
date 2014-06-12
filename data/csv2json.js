@@ -5,37 +5,37 @@ var _ = require("underscore");
 
 function makeCrop (crop) {
   if (crop === "Lemons") {
-    return {"type": crop, "season": ["December", "January", "February", "March"]};
+    return {"type": crop, "months": ["December", "January", "February", "March"], "seasons": ["Winter", "Spring"]};
   }
   if (crop === "Olives") {
-    return {"type": crop, "season": ["September", "October", "November", "December"]};
+    return {"type": crop, "months": ["September", "October", "November", "December"], "seasons": ["Fall", "Winter"]};
   }
   if (crop === "Medjool Dates") {
-    return {"type": crop, "season": ["September", "October", "November"]};
+    return {"type": crop, "months": ["September", "October", "November"], "seasons": ["Fall"]};
   }
   if (crop === "Apples") {
-    return {"type": crop, "season": ["July", "August", "September", "October"]};
+    return {"type": crop, "months": ["July", "August", "September", "October"], "seasons": ["Summer", "Fall"]};
   }
   if (crop === "Sweet Corn") {
-    return {"type": crop, "season": ["July", "August", "September"]};
+    return {"type": crop, "months": ["July", "August", "September"], "seasons": ["Summer", "Fall"]};
   }
   if (crop === "Chili Peppers" || crop === "Anaheim Chilis") {
-    return {"type": crop, "season": ["August", "September", "October", "November"]};
+    return {"type": crop, "months": ["August", "September", "October", "November"], "seasons": ["Summer", "Fall"]};
   }
   if (crop === "Viticultural Grapes") {
-    return {"type": crop, "season": ["September", "October"]};
+    return {"type": crop, "months": ["September", "October"], "seasons": ["Fall"]};
   }
   if (crop === "Romaine Lettuce") {
-    return {"type": crop, "season": ["December", "January", "February", "March", "April", "May"]};
+    return {"type": crop, "months": ["December", "January", "February", "March", "April", "May"], "seasons": ["Winter", "Spring"]};
   }
   if (crop === "Lavender") {
-    return {"type": crop, "season": ["May", "June", "July"]};
+    return {"type": crop, "months": ["May", "June", "July"], "seasons": ["Spring", "Summer"]};
   }
   if (crop === "Pumpkins") {
-    return {"type": crop, "season": ["October", "November", "December"]};
+    return {"type": crop, "months": ["October", "November", "December"], "seasons": ["Fall", "Winter"]};
   }
   if (crop === "Honey") {
-    return {"type": crop, "season": []};
+    return {"type": crop, "months": [], "seasons": []};
   }
 }
 

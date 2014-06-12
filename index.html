@@ -28,20 +28,30 @@
 	</head>
   <body>
   	<div id="map"></div>
-    <div id="content-tab" class="show-tab">
-      <div class="navbar" role="navigation">
-        <div class="navbar-header">        
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#content-tab">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
           <a class="navbar-brand" href="#">U-Pick Arizona</a>
         </div>
       </div>
-      <div class="navbar" role="navigation">
-        <ul class="nav nav-pills nav-justified">
-          <li class="active">
-            <a href="#toggle-layers" data-toggle="tab">Layers</a>
-          </li>
-          <li><a href="#get-directions" data-toggle="tab">Directions</a></li>
-          <li><a href="#download-data" data-toggle="tab">Data</a></li>  
-        </ul>
+    </nav>
+    <div id="content-tab" class="collapse navbar-collapse">
+      <div class="btn-group btn-group-justified">
+        <div class="btn-group">
+          <button type="button" href="#toggle-layers" data-toggle="tab" class="btn btn-default active">Layers</button>
+        </div>
+        <div class="btn-group">
+          <button type="button" href="#get-directions" data-toggle="tab" class="btn btn-default">Content</button>
+        </div>
+        <div class="btn-group">
+          <button type="button" href="#download-data" data-toggle="tab" class="btn btn-default">Data</button>
+        </div>
       </div>
       <div class="tab-content">
         <div class="tab-pane active" id="toggle-layers">
@@ -56,7 +66,7 @@
       <div id="toggle-controller">
         <div id="toggle-all">
           Toggle all farms
-          <button id="all" type="button" class="btn btn-primary btn-lng btn-block">All Farms</button>
+          <button id="all" type="button" class="btn btn-primary btn-lng btn-block active">All Farms</button>
         </div>
         <div id="toggle-crops">
           <div>Filter locations by crops</div>
@@ -115,6 +125,7 @@
     </script>
 
   	<script src="vendor/leaflet-0.7.2.js"></script>
+    <script src="scripts/L.FilterGeoJSON.js"></script>
   	<script src="vendor/jquery-1.11.0.js"></script>
 		<script src="vendor/typeahead.bundle.min.js"></script>
   	<script src="vendor/underscore-1.6.0.js"></script>

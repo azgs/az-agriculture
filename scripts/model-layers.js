@@ -25,7 +25,7 @@ app.models.LayerModel = Backbone.Model.extend({
 // Model for how we define a Leaflet GeoJSON layer
 app.models.GeoJSONLayer = app.models.LayerModel.extend({
   createLayer: function (options, callback) {
-    var layer = new L.geoJson(null, this.get("layerOptions"));
+    var layer = L.filterGeoJson(null, this.get("layerOptions"));
     callback(layer);
   },
   toggleSupport: function (data) {
