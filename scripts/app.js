@@ -52,7 +52,7 @@ d3.json(app.serviceUrl, function (err, res) {
         layerOptions: {
           pointToLayer: function (f, ll) {
             var marker = {
-              radius: 5,
+              radius: 8,
               fillColor: "blue",
             }
             return L.circleMarker(ll, marker);

@@ -13,24 +13,35 @@ body {
   width: 100%;
 }
 
+#content-template {
+  position: absolute;
+  padding: 0;
+  margin: 8px;
+  left: 0;
+  right: 0;
+  bottom: 60px;
+  top: 0;
+}
+
 .navbar {
-  margin-left: 2%;
-  margin-right: 2%;
-  margin-top: 2%;
-  margin-bottom: 1%;
+  margin-bottom: 6px;
   opacity: 0.9;
 }
 
 #content-tab {
   background-color: #fff;
   opacity: 0.9;
-  position: absolute;
   border-radius: 4px 4px 4px 4px;
-  margin-right: 2%;
-  margin-left: 2%;
-  width: 96%;
-  height: 89%;
   overflow: auto;
+  height: 100% !important;
+}
+
+#content-window {
+  width: 90%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .collapsing {
@@ -39,6 +50,29 @@ body {
   -ms-transition: none;
   -o-transition: none;
   transition: none;
+}
+
+.btn-group-vertical {
+  width: 100%;
+}
+
+.btn-group {
+  width: 100%;
+}
+
+.btn-group .btn {
+  width: 25%;
+}
+
+.btn:focus {
+  outline: none;
+  background-color: transparent;
+}
+
+.btn.active {
+  background-color: #3276b1;
+  border-color: #285e8e;
+  color: #fff;
 }
 
 /*
@@ -130,18 +164,7 @@ body {
   border-bottom: 2px solid #333;
 }
 
-.btn-group-vertical {
-  width: 100%;
-}
 
-.btn:focus {
-  outline: none;
-  background-color: transparent;
-}
-
-.btn.active {
-  background-color: red;
-}
 
 @media (max-width: 767px){
   .url-break {
