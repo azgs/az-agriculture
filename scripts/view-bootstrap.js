@@ -8,14 +8,28 @@ app.views.NavbarView = Backbone.View.extend({
   },
   toggleButton: function (e) {
     var target = $(e.currentTarget);
+    var content = $('#content-tab');
     if (target.hasClass('active')) {
       target.removeClass('active');
+      content.removeClass('active');
     } else {
       target.addClass('active');
+      content.addClass('active');
     }
   }
 });
 
 app.views.ContentView = Backbone.View.extend({
-  
+  events: {
+    'click .tab-control button': 'toggleContent',
+  },
+  toggleContent: function (e) {
+    var target = $(e.currentTarget);
+    if (target.hasClass('active')) {
+      target.removeClass('active');
+    } else {
+      $('.tab-control > .btn-group > .btn').removeClass('active');
+      target.addClass('active');
+    }
+  }
 });

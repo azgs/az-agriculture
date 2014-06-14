@@ -40,6 +40,14 @@ app.baseMapView = new app.views.BaseMapView({
   })
 }).render();
 
+app.navbarView = new app.views.NavbarView({
+  el: $('.navbar').first(),
+}).render();
+
+app.contentView = new app.views.ContentView({
+  el: $('#content-window').first(),
+}).render();
+
 d3.json(app.serviceUrl, function (err, res) {
   if (err) console.log(err);
   if (res) {
