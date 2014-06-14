@@ -56,7 +56,7 @@ d3.json(app.serviceUrl, function (err, res) {
               fillColor: "blue",
             }
             return L.circleMarker(ll, marker);
-          }
+          },
         }
       })
     }).render();

@@ -56,6 +56,7 @@ L.FilterGeoJSON = L.FeatureGroup.extend({
     } else if (this.options.filter(json)) {
       var pointToLayer = this._style.pointToLayer;
       var layer = L.GeoJSON.geometryToLayer(json, pointToLayer);
+      layer.bindPopup('hello world');
       layer.feature = json;
       this.addLayer(layer);
     }
