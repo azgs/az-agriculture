@@ -56,7 +56,13 @@ L.FilterGeoJSON = L.FeatureGroup.extend({
     } else if (this.options.filter(json)) {
       var pointToLayer = this._style.pointToLayer;
       var layer = L.GeoJSON.geometryToLayer(json, pointToLayer);
-      layer.bindPopup('hello world');
+      var title = json.properties.source;
+      var uid = json.properties.uid;
+      var html = '<div id="map-content"><h6>' + title + '</h6>';
+          html += '<button type="button" id=' + uid;
+          html += ' class="btn btn-success btn-block">';
+          html += 'Information</button></div>';
+      layer.bindPopup(html);
       layer.feature = json;
       this.addLayer(layer);
     }

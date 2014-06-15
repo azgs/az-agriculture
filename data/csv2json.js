@@ -60,6 +60,7 @@ function makeChild (obj) {
       ]
     },
     "properties": {
+      "uid": Math.floor(Math.random()*10000000),
       "crop": cropSeasons,
       "source": obj["Farm/Grower"],
       "street": obj["Location"],

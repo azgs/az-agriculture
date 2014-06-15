@@ -3,6 +3,13 @@ var root = this;
 root.app == null ? app = root.app = {} : app = root.app;
 app.models == null ? app.models = app.models = {} : app.models = app.models;
 
+app.models.MapContentView = Backbone.Model.extend({
+  defaults: {
+    id: 'undefined',
+    data: 'undefined',
+  }
+});
+
 // Base model for how we define a Leaflet layer
 app.models.LayerModel = Backbone.Model.extend({
   defaults: {

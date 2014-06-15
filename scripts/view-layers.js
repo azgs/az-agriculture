@@ -26,7 +26,7 @@ app.views.FarmsView = Backbone.View.extend({
   },
   events: {
     "click a": "switchLayers",
-    "click button": "toggleLayers" ,
+    "click button": "toggleLayers",
   },
   addToMap: function () {
     this.model.get("layer").addTo(app.map);
@@ -112,6 +112,11 @@ app.views.FarmsView = Backbone.View.extend({
         }
         self.filterJSON(layer, self.active);
       }
+      
+app.mapContentView = new app.views.MapContentView({
+  el: $('#map-content').first(),
+}).render();
+
     }
   },
   switchLayers: function (e) {

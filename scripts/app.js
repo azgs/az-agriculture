@@ -69,8 +69,16 @@ d3.json(app.serviceUrl, function (err, res) {
       })
     }).render();
 
+  app.mapContentView = new app.views.MapContentView({
+    el: $('#map .leaflet-popup-pane'),
+    model: new app.models.MapContentView({
+      id: 'contentmodel',
+      data: res,
+    })
+  }).render();
+
   app.routeView = new app.views.RouteView({
-    el: $("#get-directions").first(),
+    el: $("#get-content").first(),
     model: new app.models.Route({
       farmsData: res,
       lineOptions: {
@@ -103,7 +111,6 @@ d3.json(app.serviceUrl, function (err, res) {
       return {
         name: f.properties.source,
         source: 'Farms',
-
         lat: f.geometry.coordinates[1],
         lng: f.geometry.coordinates[0],
       }

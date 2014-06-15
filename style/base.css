@@ -50,12 +50,12 @@ body {
   margin-right: auto;
 }
 
-.collapsing {
-  -webkit-transition: none;
-  -moz-transition: none;
-  -ms-transition: none;
-  -o-transition: none;
-  transition: none;
+h4 {
+  text-align: center;
+}
+
+#feature-content-tab h4 {
+  text-align: left;
 }
 
 .btn-group-vertical {
@@ -124,6 +124,12 @@ body {
 .btn.btn-primary.active {
   background-color: #428bca;
   border-color: #357ebd;
+  color: #fff;
+}
+
+#map-content .btn.btn-success.btn-block {
+  background-color: #47a447;
+  border-color: #398439;
   color: #fff;
 }
 

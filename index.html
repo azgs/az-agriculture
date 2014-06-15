@@ -45,21 +45,17 @@
       <div id="content-window">
         <div class="tab-control btn-group btn-group-justified">
           <div class="btn-group">
-            <button type="button" href="#toggle-layers" data-toggle="tab" class="btn btn-default active">Layers</button>
+            <button type="button" id="toggle-layers-btn" href="#toggle-layers" data-toggle="tab" class="btn btn-default active">Layers</button>
           </div>
           <div class="btn-group">
-            <button type="button" href="#get-directions" data-toggle="tab" class="btn btn-default">Content</button>
-          </div>
-          <div class="btn-group">
-            <button type="button" href="#download-data" data-toggle="tab" class="btn btn-default">Data</button>
+            <button type="button" id='get-content-btn' href="#get-content" data-toggle="tab" class="btn btn-default">Content</button>
           </div>
         </div>
         <div class="tab-content">
           <div class="tab-pane active" id="toggle-layers">
           </div>
-          <div class="tab-pane" id="get-directions">
+          <div class="tab-pane" id="get-content">
           </div>
-          <div class="tab-pane" id="download-data"></div>
         </div>
       </div>
     </div>
@@ -67,11 +63,11 @@
     <script id="toggle-layers-template" type="text/html">
       <div id="toggle-controller">
         <div id="toggle-all">
-          Toggle all farms
+          <h4>Toggle all farms</h4>
           <button id="all" type="button" class="btn btn-primary btn-lng btn-block active">All Farms</button>
         </div>
         <div id="toggle-crops">
-          <div>Filter locations by crops</div>
+          <h4>Filter locations by crops</h4>
           <div class="btn-group-vertical">
             <% _.each(crops, function (layer) { %>
               <button id=<%= layer["id"] %> type="button" class="btn btn-default"><%= layer["display"] %></button>
@@ -79,13 +75,47 @@
           </div>
         </div>
         <div id="toggle-seasons">
-          <div>Filter locations by season</div>
+          <h4>Filter locations by season</h4>
           <div class="btn-group">
             <% _.each(seasons, function (layer) { %>
               <button id=<%= layer["id"] %> type="button" class="btn btn-default"><%= layer["display"] %></button>
             <% }); %>
           </div>
         </div>
+      </div>
+    </script>
+
+    <script id="render-content-template" type="text/html">
+      <div id="feature-content-tab">
+        <h4><%= data.properties.source %></h4>
+        <h5><%= data.properties.owner %></h5>
+        <%= data.properties.notes %>
+        <br>
+        <h5>Products</h5>
+          <ul>
+            <% _.each(data.properties.crop, function (crop) { %>
+              <li><%= crop["type"] %></li>
+            <% }); %>
+          </ul>
+        <h5>Offerings</h5>
+          <ul>
+            <% _.each(data.properties.store, function (store) { %>
+              <li><%= store %></li>
+            <% }); %>
+          </ul>
+        <address>
+          <br>
+          <strong>Hours of Operation:</strong><br>
+          <%= data.properties.hours %><br>
+          <br>
+          <strong>Address:</strong><br>
+          <%= data.properties.street %><br>
+          <%= data.properties.area %>, AZ<br>
+          <br>
+          <strong>Contact:</strong><br>
+          <%= data.properties.phone %><br>
+          <%= data.properties.email %><br>
+        </address>
       </div>
     </script>
 
@@ -123,9 +153,6 @@
       </li>
     </script>
 
-    <script id="download-data-template" type="text/html">
-    </script>
-
   	<script src="vendor/leaflet-0.7.2.js"></script>
     <script src="scripts/L.FilterGeoJSON.js"></script>
   	<script src="vendor/jquery-1.11.0.js"></script>
@@ -141,6 +168,7 @@
 		<script src="scripts/model-typeahead.js"></script>
   	<script src="scripts/view-typeahead.js"></script>
     <script src="scripts/view-bootstrap.js"></script>
+    <script src="scripts/view-content.js"></script>
   	<script src="scripts/app.js"></script>
   </body>
 </html>
