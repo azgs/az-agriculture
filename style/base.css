@@ -13,16 +13,6 @@ body {
   width: 100%;
 }
 
-#content-template {
-  position: absolute;
-  padding: 0;
-  margin: 8px;
-  left: 0;
-  right: 0;
-  bottom: 60px;
-  top: 0;
-}
-
 .navbar {
   padding: 0;
   left: 0;
@@ -34,27 +24,28 @@ body {
 }
 
 #content-tab {
-  display: none;
-  width: 100%;
-}
-
-#content-tab.active {
-  display: block;
+  position: absolute;
+  background-color: #fff;
   padding: 0;
   margin: 8px;
   left: 0;
   right: 0;
-  bottom: 60px;
-  max-width: 100%;
+  top: 60px;
+  bottom: 8px;
+  display: none;
+}
+
+#content-tab.active {
+  display: block;
 }
 
 #content-window {
-  position: absolute;
-  background-color: #fff;
+  position: relative;
   opacity: 0.9;
   overflow: auto;
   width: 90%;
-  height: 75%;
+  height: 95%;
+  margin: 8px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -84,9 +75,55 @@ body {
   background-color: transparent;
 }
 
+.btn:hover {
+  outline: none;
+  background-color: transparent;
+}
+
+.btn-primary:hover {
+  outline: none;
+  background-color: transparent;  
+}
+
+.navbar-default:focus {
+  outline: none;
+  background-color: transparent;
+}
+
+.navbar-default .navbar-toggle:hover, 
+.navbar-default .navbar-toggle:focus {
+  outline: none;
+  background-color: transparent;
+}
+
+.navbar-default .navbar-toggle.active {
+  background-color: #428bca;
+  border-color: #357ebd;
+  color: #fff;
+}
+
+.navbar-default .navbar-toggle .icon-bar.active {
+  background-color: #fff;
+}
+
+.btn {
+  border-color: #adadad;
+}
+
 .btn.active {
-  background-color: #3276b1;
-  border-color: #285e8e;
+  background-color: #428bca;
+  border-color: #357ebd;
+  color: #fff;
+}
+
+.btn.btn-primary {
+  background-color: #fff;
+  color: #000;
+}
+
+.btn.btn-primary.active {
+  background-color: #428bca;
+  border-color: #357ebd;
   color: #fff;
 }
 

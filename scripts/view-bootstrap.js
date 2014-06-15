@@ -12,9 +12,11 @@ app.views.NavbarView = Backbone.View.extend({
     if (target.hasClass('active')) {
       target.removeClass('active');
       content.removeClass('active');
+      $('.icon-bar').removeClass('active');
     } else {
       target.addClass('active');
       content.addClass('active');
+      $('.icon-bar').addClass('active');
     }
   }
 });
