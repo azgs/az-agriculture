@@ -26,7 +26,10 @@ if (app.width > 768) {
   app.centerPoint = app.map.getPixelOrigin().x;
   app.offset = app.centerPoint * 0.975;
   app.pan = app.centerPoint - app.offset;
-  app.map.panBy([app.pan, 0]);  
+  app.map.panBy([app.pan, 0]);
+  $('.icon-bar').addClass('active');
+  $('.navbar-toggle').addClass('active');
+  $('#content-tab').addClass('active');
 }
 
 // Instantiate basemap model/view

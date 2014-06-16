@@ -5,6 +5,7 @@ body {
   width: 100%;
 	overflow: hidden;
 }
+
 #map {
   position: absolute;
   top: 0;
@@ -23,220 +24,277 @@ body {
   opacity: 0.9;
 }
 
-#content-tab {
-  position: absolute;
-  background-color: #fff;
-  padding: 0;
-  margin: 8px;
-  left: 0;
-  right: 0;
-  top: 60px;
-  bottom: 8px;
-  display: none;
+.collapse {
+  display: none !important;
 }
 
-#content-tab.active {
-  display: block;
-}
-
-#content-window {
-  position: relative;
-  opacity: 0.9;
-  overflow: auto;
-  width: 90%;
-  height: 95%;
-  margin: 8px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-h4 {
-  text-align: center;
-}
-
-#feature-content-tab h4 {
-  text-align: left;
-}
-
-.btn-group-vertical {
-  width: 100%;
-}
-
-.btn-group {
-  width: 100%;
-}
-
-.btn-group .btn {
-  width: 25%;
-}
-
-.btn:focus {
-  outline: none;
-  background-color: transparent;
-}
-
-.btn:hover {
-  outline: none;
-  background-color: transparent;
-}
-
-.btn-primary:hover {
-  outline: none;
-  background-color: transparent;  
-}
-
-.navbar-default:focus {
-  outline: none;
-  background-color: transparent;
-}
-
-.navbar-default .navbar-toggle:hover, 
-.navbar-default .navbar-toggle:focus {
-  outline: none;
-  background-color: transparent;
-}
-
-.navbar-default .navbar-toggle.active {
-  background-color: #428bca;
-  border-color: #357ebd;
-  color: #fff;
-}
-
-.navbar-default .navbar-toggle .icon-bar.active {
-  background-color: #fff;
-}
-
-.btn {
-  border-color: #adadad;
-}
-
-.btn.active {
-  background-color: #428bca;
-  border-color: #357ebd;
-  color: #fff;
-}
-
-.btn.btn-primary {
-  background-color: #fff;
-  color: #000;
-}
-
-.btn.btn-primary.active {
-  background-color: #428bca;
-  border-color: #357ebd;
-  color: #fff;
-}
-
-#map-content .btn.btn-success.btn-block {
-  background-color: #47a447;
-  border-color: #398439;
-  color: #fff;
-}
-
-/*
-#content-tab {
-  background-color: #FFFFFF;
-  opacity: 0.9;
-  position: absolute;
-  border-radius: 4px 4px 4px 4px;
-  right: 1%;
-  top: 1%;
-  bottom: 1%;
-  height: 98%;
-  width: 33%;
-  overflow: auto;
-  -webkit-transition: 0.5s linear;
-  -moz-transition: 0.5s linear;
-  -o-transition: 0.5s linear;
-  transition: 0.5s linear;
-}
-
-#get-directions {
-  padding-right: 3%;
-  padding-left: 3%;
-  height: 100%;
-  max-height: 100%;
-  overflow: auto;
-}
-
-.navbar {
-  margin-bottom: 0px;
-}
-
-.navbar .navbar-brand {
-  font-weight: bold;
-  font-size: 25px;
-  color: #000;
-}
-
-.tab-content{
-	height: calc(100% - 102px);
-	height: -o-calc(100% - 102px);
-	height: -webkit-calc(100% - 102px);
-	height: -moz-calc(100% - 102px);
-}
-
-.step-detail{
-	font-size: smaller;
-	font-style: italic;
-	float: right;
-}
-
-.twitter-typeahead { 
-	width: 100%; 
-}
-.typeahead {
-  background-color: #FFFFFF;
-	width: 100%;
-}
-.tt-dropdown-menu {
-  background-color: #FFFFFF;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 4px 4px 4px 4px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  margin-top: 4px;
-  padding: 4px 0;
-  width: 100%;
-  max-height: 300px;
-  overflow: auto;
-}
-.tt-suggestion {
-  font-size: 14px;
-  line-height: 20px;
-  padding: 3px 10px;
-}
-.tt-suggestion.tt-cursor {
-  background-color: #0097CF;
-  color: #FFFFFF;
-  cursor: pointer;
-}
-.tt-suggestion p {
-  margin: 0;
-}
-.tt-suggestion + .tt-suggestion {
-  border-top: 1px solid #ccc;
-}
-.typeahead-header {
-  margin: 0 5px 5px 5px;
-  padding: 3px 0;
-  border-bottom: 2px solid #333;
-}
-
-
-
-@media (max-width: 767px){
-  .url-break {
-    word-break: break-all;
-    word-break: break-word;
-    -webkit-hyphens: auto;
-    hyphens: auto;
+@media(max-width:767px){
+  #content-tab {
+    position: absolute;
+    background-color: #fff;
+    padding: 0;
+    margin: 8px;
+    left: 0;
+    right: 0;
+    top: 60px;
+    bottom: 8px;
+    display: none;
   }
 
-	.tab-content{
-		height: calc(100% - 189px);
-		height: -o-calc(100% - 189px);
-		height: -webkit-calc(100% - 189px); 
-		height: -moz-calc(100% - 189px);
-	}
+  #content-tab.active {
+    display: block;
+  }
+
+  #content-window {
+    position: relative;
+    opacity: 0.9;
+    overflow: auto;
+    width: 90%;
+    height: 95%;
+    margin: 8px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  h4 {
+    text-align: center;
+  }
+
+  #feature-content-tab h4 {
+    text-align: left;
+  }
+
+  .btn-group-vertical {
+    width: 100%;
+  }
+
+  .btn-group {
+    width: 100%;
+  }
+
+  .btn-group .btn {
+    width: 25%;
+  }
+
+  .btn:focus {
+    outline: none;
+    background-color: transparent;
+  }
+
+  .btn:hover {
+    outline: none;
+    background-color: transparent;
+  }
+
+  .btn-primary:hover {
+    outline: none;
+    background-color: transparent;  
+  }
+
+  .navbar-default:focus {
+    outline: none;
+    background-color: transparent;
+  }
+
+  .navbar-default .navbar-toggle:hover, 
+  .navbar-default .navbar-toggle:focus {
+    outline: none;
+    background-color: transparent;
+  }
+
+  .navbar-default .navbar-toggle.active {
+    background-color: #428bca;
+    border-color: #357ebd;
+    color: #fff;
+  }
+
+  .navbar-default .navbar-toggle .icon-bar.active {
+    background-color: #fff;
+  }
+
+  .btn {
+    border-color: #adadad;
+  }
+
+  .btn.active {
+    background-color: #428bca;
+    border-color: #357ebd;
+    color: #fff;
+  }
+
+  .btn.btn-primary {
+    background-color: #fff;
+    color: #000;
+  }
+
+  .btn.btn-primary.active {
+    background-color: #428bca;
+    border-color: #357ebd;
+    color: #fff;
+  }
+
+  #map-content .btn.btn-success.btn-block {
+    background-color: #47a447;
+    border-color: #398439;
+    color: #fff;
+  } 
 }
-*/
+
+@media(min-width:768px){
+  .leaflet-top .leaflet-control {
+    margin-top: 70px;
+  }
+  #content-tab {
+    position: absolute;
+    background-color: #fff;
+    padding: 0;
+    margin: 8px;
+    right: 0;
+    top: 60px;
+    bottom: 8px;
+    width: 33%;
+    display: none;
+  }
+
+  #content-tab.active {
+    display: block;
+  }
+
+  #content-window {
+    position: relative;
+    opacity: 0.9;
+    overflow: auto;
+    width: 90%;
+    height: 95%;
+    margin: 8px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  h4 {
+    text-align: center;
+  }
+
+  #feature-content-tab h4 {
+    text-align: left;
+  }
+
+  .btn-group-vertical {
+    width: 100%;
+  }
+
+  .btn-group {
+    width: 100%;
+  }
+
+  .btn-group .btn {
+    width: 25%;
+  }
+
+  .btn:focus {
+    outline: none;
+    background-color: transparent;
+  }
+
+  .btn:hover {
+    outline: none;
+    background-color: transparent;
+  }
+
+  .btn-primary:hover {
+    outline: none;
+    background-color: transparent;  
+  }
+
+  .navbar-default:focus {
+    outline: none;
+    background-color: transparent;
+  }
+
+  .navbar-default .navbar-toggle:hover, 
+  .navbar-default .navbar-toggle:focus {
+    outline: none;
+    background-color: transparent;
+  }
+
+  .navbar-default .navbar-toggle.active {
+    background-color: #428bca;
+    border-color: #357ebd;
+    color: #fff;
+  }
+
+  .navbar-default .navbar-toggle .icon-bar.active {
+    background-color: #fff;
+  }
+
+  .btn {
+    border-color: #adadad;
+  }
+
+  .btn.active {
+    background-color: #428bca;
+    border-color: #357ebd;
+    color: #fff;
+  }
+
+  .btn.btn-primary {
+    background-color: #fff;
+    color: #000;
+  }
+
+  .btn.btn-primary.active {
+    background-color: #428bca;
+    border-color: #357ebd;
+    color: #fff;
+  }
+
+  #map-content .btn.btn-success.btn-block {
+    background-color: #47a447;
+    border-color: #398439;
+    color: #fff;
+  }
+  
+  .navbar-header {
+    float: none;
+  }
+    
+  .navbar-left,.navbar-right {
+    float: none !important;
+  }
+  
+  .navbar-toggle {
+    display: block;
+  }
+  
+  .navbar-collapse {
+    border-top: 1px solid transparent;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+  }
+  
+  .navbar-fixed-top {
+    top: 0;
+    border-width: 0 0 1px;
+  }
+
+  .navbar-collapse.collapse {
+    display: none!important;
+  }
+  
+  .navbar-nav {
+    float: none!important;
+    margin-top: 7.5px;
+  }
+
+  .navbar-nav>li {
+    float: none;
+  }
+  
+  .navbar-nav>li>a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  
+  .collapse.in{
+    display: block !important;
+  }
+}
