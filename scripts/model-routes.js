@@ -155,6 +155,8 @@ app.models.Route = Backbone.Model.extend({
         // Final JSON object to return to the view
         var geoJSON = {
           "bbox": routeInfo[0].bbox,
+					"totalTime": routeInfo[0].time,
+					"totalDistance": routeInfo[0].distance,
           "lines": {"type": "FeatureCollection", "features": [geoJsonLines]},
           "points": {"type": "FeatureCollection", "features": geoJsonPoints},
         };
