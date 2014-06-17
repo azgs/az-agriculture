@@ -49,10 +49,9 @@ app.views.RouteResultsView = Backbone.View.extend({
   },
 	formatTime: function (time) {
 		var hrs = parseInt(time.split(":")[0], 10);
-		var min = parseInt(time.split(":")[1], 10);
-		var sec = parseInt(time.split(":")[2], 10);
+		var min = parseInt(time.split(":")[1], 10);	
 		if (hrs > 0)
-			return hrs + ":" + min + " hrs";
+			return hrs + ":" + time.split(":")[1] + " hrs";
 		if (min > 0)
 			return min + " min";
 		else
