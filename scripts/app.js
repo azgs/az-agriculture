@@ -3,6 +3,7 @@ var root = this;
 root.app == null ? app = root.app = {} : app = root.app;
 
 app.serviceUrl = "http://localhost:3000/farms.json";
+//app.serviceUrl = "http://159.87.39.12/az-agriculture/farms.json";
 
 app.intialExtent = L.latLngBounds(
   [37.094259, -115.115688],

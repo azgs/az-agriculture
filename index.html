@@ -9,7 +9,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="description" content="Arizona Agriculture">
     <meta name="author" content="Arizona Geological Survey">
-		<title>AZ Agriculture</title>
+		<title>AZ Farms</title>
   	<link rel="stylesheet" href="vendor/leaflet-0.7.2.css" />
 		<link rel="stylesheet" href="vendor/font-awesome-4.0.3/css/font-awesome.min.css">
 		<link rel="stylesheet" href="vendor/bootstrap-3.1.1.css">
@@ -31,13 +31,13 @@
     <nav class="navbar navbar-default" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
+					<a class="navbar-brand" href="#">U-Pick Arizona</a>
           <button type="button" class="navbar-toggle" data-target="#content-tab">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">U-Pick Arizona</a>
         </div>
       </div>
     </nav>
@@ -103,7 +103,7 @@
 							<%= data.properties.email %><br>
 						</td>
 						<td>
-							<input type="image" src="images/directions_sign.png" id='get-directions-btn' class="toDirection" href="#get-directions" data-toggle="tab" alt="alternative text" title="Get Directions" source="<%= data.properties.source %>"><br>
+							<input type="image" src="images/directions_sign.png" height="42" width="42" id='get-directions-btn' class="toDirection" href="#get-directions" data-toggle="tab" alt="alternative text" title="Get Directions" source="<%= data.properties.source %>"><br>
 							<a class="toDirection" href="#get-directions" data-toggle="tab" alt="alternative text" title="Get Directions" source="<%= data.properties.source %>">Directions</a></input>
 						</td>
 					</tr>
