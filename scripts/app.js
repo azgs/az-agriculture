@@ -16,6 +16,14 @@ app.mapOptions = {
   maxBounds: app.maxBounds,
 };
 
+// When the Directions image is clicked on a farm's Detail tab open
+// the Directions tab and fill in the origin with the farm source
+$("body").on("click",".toDirection",function(){
+	$('#geo-destination').val($(this).attr('source'));
+  $('.tab-control > .btn-group > .btn').removeClass('active');
+	$('#get-directions-btn').addClass('active');
+});
+
 app.width = window.innerWidth;
 if (app.width < 768) { app.mapOptions['zoomControl'] = false; };
 
@@ -30,7 +38,7 @@ if (app.width > 768) {
   $('.icon-bar').addClass('active');
   $('.navbar-toggle').addClass('active');
   $('#content-tab').addClass('active');
-}
+};
 
 // Instantiate basemap model/view
 app.baseMapView = new app.views.BaseMapView({
@@ -81,7 +89,7 @@ d3.json(app.serviceUrl, function (err, res) {
   }).render();
 
   app.routeView = new app.views.RouteView({
-    el: $("#get-content").first(),
+    el: $("#get-directions").first(),
     model: new app.models.Route({
       farmsData: res,
       lineOptions: {

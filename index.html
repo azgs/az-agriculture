@@ -45,16 +45,21 @@
       <div id="content-window">
         <div class="tab-control btn-group btn-group-justified">
           <div class="btn-group">
-            <button type="button" id="toggle-layers-btn" href="#toggle-layers" data-toggle="tab" class="btn btn-default active">Layers</button>
+            <button type="button" id="toggle-layers-btn" href="#toggle-layers" data-toggle="tab" class="btn btn-default active">Farms</button>
           </div>
           <div class="btn-group">
-            <button type="button" id='get-content-btn' href="#get-content" data-toggle="tab" class="btn btn-default">Content</button>
+            <button type="button" id='get-content-btn' href="#get-content" data-toggle="tab" class="btn btn-default">Detail</button>
+          </div>
+					<div class="btn-group">
+            <button type="button" id='get-directions-btn' href="#get-directions" data-toggle="tab" class="btn btn-default">Directions</button>
           </div>
         </div>
         <div class="tab-content">
           <div class="tab-pane active" id="toggle-layers">
           </div>
           <div class="tab-pane" id="get-content">
+          </div>
+					<div class="tab-pane" id="get-directions">
           </div>
         </div>
       </div>
@@ -88,34 +93,39 @@
     <script id="render-content-template" type="text/html">
       <div id="feature-content-tab">
         <h4><%= data.properties.source %></h4>
-        <h5><%= data.properties.owner %></h5>
+				<table class="table">
+					<tbody
+					<tr>
+						<td class="contact-info">
+							<%= data.properties.street %><br>
+							<%= data.properties.area %>, AZ<br>
+							<%= data.properties.phone %><br>
+							<%= data.properties.email %><br>
+						</td>
+						<td>
+							<input type="image" src="images/directions_sign.png" id='get-directions-btn' class="toDirection" href="#get-directions" data-toggle="tab" alt="alternative text" title="Get Directions" source="<%= data.properties.source %>"><br>
+							<a class="toDirection" href="#get-directions" data-toggle="tab" alt="alternative text" title="Get Directions" source="<%= data.properties.source %>">Directions</a></input>
+						</td>
+					</tr>
+					</tbody>
+				</table>
         <%= data.properties.notes %>
         <br>
-        <h5>Products</h5>
+        <h5><strong>Products</strong></h5>
           <ul>
             <% _.each(data.properties.crop, function (crop) { %>
               <li><%= crop["type"] %></li>
             <% }); %>
           </ul>
-        <h5>Offerings</h5>
+        <h5><strong>Offerings</strong></h5>
           <ul>
             <% _.each(data.properties.store, function (store) { %>
               <li><%= store %></li>
             <% }); %>
           </ul>
-        <address>
-          <br>
-          <strong>Hours of Operation:</strong><br>
-          <%= data.properties.hours %><br>
-          <br>
-          <strong>Address:</strong><br>
-          <%= data.properties.street %><br>
-          <%= data.properties.area %>, AZ<br>
-          <br>
-          <strong>Contact:</strong><br>
-          <%= data.properties.phone %><br>
-          <%= data.properties.email %><br>
-        </address>
+				<strong>Hours of Operation:</strong><br>
+        <%= data.properties.hours %><br>
+				<h5><strong>Owner: </strong><%= data.properties.owner %></h5>
       </div>
     </script>
 
@@ -132,7 +142,7 @@
             <div class="form-group">
               <input type="text" class="form-control" id="geo-destination" placeholder="Enter destination">
             </div>
-            <button type="submit" class="btn btn-default">Submit</button>
+            <button type="directions" class="btn btn-default">Submit</button>
           </form>
         </div>
         <div class="tab-pane" id="show-directions">
@@ -140,15 +150,30 @@
     </script>
 
     <script id="show-directions-template" type="text/html">
-      <div class="panel panel-default">
-          <div class="list-group"></div>
+			<div class="panel panel-default">
+				<% if (found == true) { %>
+					<div class="totals">
+							Drive <%= distance %>, <%= time %><br>	
+					</div>
+					<img src="images/start.png" height="16" width="16"><strong>&nbsp;<%= $("#geo-start").val() %></strong> <br>			
+					<div class="list-group"></div>
+					<img src="images/stop.png"><strong>&nbsp;<%= $("#geo-destination").val() %></strong>
+				<% } %>
+				<% if (found == false) { %>
+					<img src="images/warning.png">&nbsp;No route found from <%= $("#geo-start").val() %> to <%= $("#geo-destination").val() %>. Check your inputs.
+				<% } %>
       </div>
     </script>
 
     <script id="show-directions-items-template" type="text/html">
       <li class="list-group-item">
+				<% if (data != undefined) { %>
         <div class="list-group-item-heading"><%= data.index+1 %>. <%= data.text %>
-				<p class="step-detail"><%= data.distance %> mi / <%= data.time %> hrs</p></div>
+				<p class="step-detail"><%= data.distance %>
+				<% if (data.time != "") { %>
+						 / <%= data.time %></p></div>
+				<% } %>
+					<% } %>
 				<div style="clear: both;"></div>
       </li>
     </script>
