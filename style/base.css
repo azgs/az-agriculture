@@ -218,7 +218,7 @@ body {
 		overflow: auto;
 	}
 }
-	
+
 @media(min-width:768px){
   .leaflet-top .leaflet-control {
     margin-top: 70px;
