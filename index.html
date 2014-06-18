@@ -72,7 +72,8 @@
           <button id="all" type="button" class="btn btn-primary btn-lng btn-block active">All Farms</button>
         </div>
         <div id="toggle-crops">
-          <h4>Filter locations by crops</h4>
+          <h4>Find Farms by Crop</h4>
+					<h5>Always call ahead (hours and offering may change)</h5>
           <div class="btn-group-vertical">
             <% _.each(crops, function (layer) { %>
               <button id=<%= layer["id"] %> type="button" class="btn btn-default"><%= layer["display"] %></button>
@@ -80,7 +81,8 @@
           </div>
         </div>
         <div id="toggle-seasons">
-          <h4>Filter locations by season</h4>
+          <h4>Find Crops by Season</h4>
+					<h5>Can’t find the crop you’re searching for? It might be out of season!</h5>
           <div class="btn-group">
             <% _.each(seasons, function (layer) { %>
               <button id=<%= layer["id"] %> type="button" class="btn btn-default"><%= layer["display"] %></button>
