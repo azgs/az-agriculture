@@ -79,7 +79,14 @@ app.views.RouteView = Backbone.View.extend({
   },
   events: {
     "submit": "getDirections",
+		"click .clear": "clear",
   },
+	// Clear the route from the panel and the map
+	clear: function () {
+		$("#show-directions .panel").remove()
+		var layers = this.model.get("layer");
+    layers.clearLayers();
+	},
   getDirections: function () {
 		var directions = {
 			from: $("#geo-start").val(),
