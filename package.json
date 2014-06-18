@@ -4,7 +4,7 @@
   "description": "GUI tool to help support local agriculture in Arizona (US).",
   "main": "server.js",
   "dependencies": {
-    "csvtojson": "^0.3.8",
+    "csvtojson": "^0.3.10",
     "express": "^4.4.1",
     "underscore": "^1.6.0"
   },
