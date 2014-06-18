@@ -73,7 +73,7 @@
         </div>
         <div id="toggle-crops">
           <h4>Find Farms by Crop</h4>
-					<h5>Always call ahead (hours and offerings may change)</h5>
+					<h5 class="subtitle">Always call ahead (hours and offerings may change)</h5>
           <div class="btn-group-vertical">
             <% _.each(crops, function (layer) { %>
               <button id=<%= layer["id"] %> type="button" class="btn btn-default"><%= layer["display"] %></button>
@@ -82,7 +82,7 @@
         </div>
         <div id="toggle-seasons">
           <h4>Find Crops by Season</h4>
-					<h5>Can’t find the crop you’re searching for? It might be out of season!</h5>
+					<h5 class="subtitle">Can’t find the crop you’re searching for? It might be out of season!</h5>
           <div class="btn-group">
             <% _.each(seasons, function (layer) { %>
               <button id=<%= layer["id"] %> type="button" class="btn btn-default"><%= layer["display"] %></button>

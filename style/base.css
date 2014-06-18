@@ -37,7 +37,7 @@ h4 {
 	text-align: center;
 }
 
-h5 {
+h5.subtitle {
 	text-align: center;
 	font-size: smaller;
 	font-style: italic;
