@@ -49,10 +49,9 @@ app.views.RouteResultsView = Backbone.View.extend({
   },
 	formatTime: function (time) {
 		var hrs = parseInt(time.split(":")[0], 10);
-		var min = parseInt(time.split(":")[1], 10);
-		var sec = parseInt(time.split(":")[2], 10);
+		var min = parseInt(time.split(":")[1], 10);	
 		if (hrs > 0)
-			return hrs + ":" + min + " hrs";
+			return hrs + ":" + time.split(":")[1] + " hrs";
 		if (min > 0)
 			return min + " min";
 		else
@@ -80,7 +79,14 @@ app.views.RouteView = Backbone.View.extend({
   },
   events: {
     "submit": "getDirections",
+		"click .clear": "clear",
   },
+	// Clear the route from the panel and the map
+	clear: function () {
+		$("#show-directions .panel").remove()
+		var layers = this.model.get("layer");
+    layers.clearLayers();
+	},
   getDirections: function () {
 		var directions = {
 			from: $("#geo-start").val(),

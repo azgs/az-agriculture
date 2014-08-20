@@ -106,8 +106,23 @@ body {
   opacity: 0.9;
 }
 
+.navbar .navbar-brand {
+  font-weight: bold;
+  font-size: 20px;
+}
+
 .collapse {
   display: none !important;
+}
+
+h4 {
+	text-align: center;
+}
+
+h5.subtitle {
+	text-align: center;
+	font-size: smaller;
+	font-style: italic;
 }
 
 .totals{
@@ -200,10 +215,6 @@ body {
     margin-right: auto;
   }
 
-  h4 {
-    text-align: center;
-  }
-
   #feature-content-tab h4 {
     text-align: left;
   }
@@ -238,6 +249,10 @@ body {
   .navbar-default:focus {
     outline: none;
     background-color: transparent;
+  }
+	
+	.navbar .navbar-brand {
+    font-size: 14px;
   }
 
   .navbar-default .navbar-toggle:hover, 
@@ -321,10 +336,6 @@ body {
     margin: 8px;
     margin-left: auto;
     margin-right: auto;
-  }
-
-  h4 {
-    text-align: center;
   }
 
   #feature-content-tab h4 {

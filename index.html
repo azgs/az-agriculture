@@ -9,7 +9,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="description" content="Arizona Agriculture">
     <meta name="author" content="Arizona Geological Survey">
-		<title>AZ Agriculture</title>
+		<title>AZ Farms</title>
   	<link rel="stylesheet" href="vendor/leaflet-0.7.2.css" />
 		<link rel="stylesheet" href="vendor/font-awesome-4.0.3/css/font-awesome.min.css">
 		<link rel="stylesheet" href="vendor/bootstrap-3.1.1.css">
@@ -31,13 +31,13 @@
     <nav class="navbar navbar-default" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
+					<a class="navbar-brand" href="#">U-Pick Arizona</a>
           <button type="button" class="navbar-toggle" data-target="#content-tab">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">U-Pick Arizona</a>
         </div>
       </div>
     </nav>
@@ -68,11 +68,12 @@
     <script id="toggle-layers-template" type="text/html">
       <div id="toggle-controller">
         <div id="toggle-all">
-          <h4>Toggle all farms</h4>
+          <h4>Show All Farms</h4>
           <button id="all" type="button" class="btn btn-primary btn-lng btn-block active">All Farms</button>
         </div>
         <div id="toggle-crops">
-          <h4>Filter locations by crops</h4>
+          <h4>Find Farms by Crop</h4>
+					<h5 class="subtitle">Always call ahead (hours and offerings may change)</h5>
           <div class="btn-group-vertical">
             <% _.each(crops, function (layer) { %>
               <button id=<%= layer["id"] %> type="button" class="btn btn-default"><%= layer["display"] %></button>
@@ -80,7 +81,8 @@
           </div>
         </div>
         <div id="toggle-seasons">
-          <h4>Filter locations by season</h4>
+          <h4>Find Crops by Season</h4>
+					<h5 class="subtitle">Can’t find the crop you’re searching for? It might be out of season!</h5>
           <div class="btn-group">
             <% _.each(seasons, function (layer) { %>
               <button id=<%= layer["id"] %> type="button" class="btn btn-default"><%= layer["display"] %></button>
@@ -103,7 +105,7 @@
 							<%= data.properties.email %><br>
 						</td>
 						<td>
-							<input type="image" src="images/directions_sign.png" id='get-directions-btn' class="toDirection" href="#get-directions" data-toggle="tab" alt="alternative text" title="Get Directions" source="<%= data.properties.source %>"><br>
+							<input type="image" src="images/directions_sign.png" height="42" width="42" id='get-directions-btn' class="toDirection" href="#get-directions" data-toggle="tab" alt="alternative text" title="Get Directions" source="<%= data.properties.source %>"><br>
 							<a class="toDirection" href="#get-directions" data-toggle="tab" alt="alternative text" title="Get Directions" source="<%= data.properties.source %>">Directions</a></input>
 						</td>
 					</tr>
@@ -142,7 +144,14 @@
             <div class="form-group">
               <input type="text" class="form-control" id="geo-destination" placeholder="Enter destination">
             </div>
-            <button type="directions" class="btn btn-default">Submit</button>
+						<div class="btn-group btn-group-justified">
+							<div class="btn-group">
+								<button type="directions" class="btn btn-default">Submit</button>
+							</div>
+							<div class="btn-group">
+								<button type="reset" class="clear btn btn-default">Clear</button>
+							</div>
+						</div>
           </form>
         </div>
         <div class="tab-pane" id="show-directions">
