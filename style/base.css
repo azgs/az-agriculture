@@ -14,78 +14,78 @@ body {
 .apple-icon:after {
   font-family: "agriculture-icons";
   content: "a";
-  font-size: 30px;
-  color: red;
+  font-size: 40px;
+  color: #b20000;
 }
 
 .pepper-icon:after {
   font-family: "agriculture-icons";
   content: "b";
-  font-size: 30px;
-  color: red;
+  font-size: 40px;
+  color: #ff0000;
 }
 
 .corn-icon:after {
   font-family: "agriculture-icons";
   content: "c";
-  font-size: 30px;
-  color: red;
+  font-size: 40px;
+  color: #e5e500;
 }
 
 .date-icon:after {
   font-family: "agriculture-icons";
   content: "d";
-  font-size: 30px;
-  color: red;
+  font-size: 40px;
+  color: #002600;
 }
 
 .honey-icon:after {
   font-family: "agriculture-icons";
   content: "e";
-  font-size: 30px;
-  color: red;
+  font-size: 40px;
+  color: #ffd700;
 }
 
 .lavender-icon:after {
   font-family: "agriculture-icons";
   content: "f";
-  font-size: 30px;
-  color: red;
+  font-size: 40px;
+  color: #e6e6fa;
 }
 
 .lemon-icon:after {
   font-family: "agriculture-icons";
   content: "g";
-  font-size: 30px;
-  color: red;
+  font-size: 40px;
+  color: #ffff00;
 }
 
 .olive-icon:after {
   font-family: "agriculture-icons";
   content: "h";
-  font-size: 30px;
-  color: red;
+  font-size: 40px;
+  color: #808000;
 }
 
 .pumpkin-icon:after {
   font-family: "agriculture-icons";
   content: "i";
-  font-size: 30px;
-  color: red;
+  font-size: 40px;
+  color: #ffa500;
 }
 
 .lettuce-icon:after {
   font-family: "agriculture-icons";
   content: "j";
-  font-size: 30px;
-  color: red;
+  font-size: 40px;
+  color: #008000;
 }
 
 .multi-icon:after {
   font-family: "agriculture-icons";
   content: "k";
-  font-size: 30px;
-  color: red;
+  font-size: 40px;
+  color: #a52a2a;
 }
 
 #map {
