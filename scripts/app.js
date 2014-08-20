@@ -16,14 +16,6 @@ app.mapOptions = {
   maxBounds: app.maxBounds,
 };
 
-// When the Directions image is clicked on a farm's Detail tab open
-// the Directions tab and fill in the origin with the farm source
-$("body").on("click",".toDirection",function(){
-	$('#geo-destination').val($(this).attr('source'));
-  $('.tab-control > .btn-group > .btn').removeClass('active');
-	$('#get-directions-btn').addClass('active');
-});
-
 app.width = window.innerWidth;
 if (app.width < 768) { app.mapOptions['zoomControl'] = false; };
 
@@ -38,7 +30,7 @@ if (app.width > 768) {
   $('.icon-bar').addClass('active');
   $('.navbar-toggle').addClass('active');
   $('#content-tab').addClass('active');
-};
+}
 
 // Instantiate basemap model/view
 app.baseMapView = new app.views.BaseMapView({
@@ -70,11 +62,61 @@ d3.json(app.serviceUrl, function (err, res) {
         active: true,
         layerOptions: {
           pointToLayer: function (f, ll) {
-            var marker = {
-              radius: 8,
-              fillColor: "blue",
+            var icon
+              , crop
+              , cropLength
+              , cropType;
+            
+            cropLength = f.properties.crop.length;
+            
+            if (cropLength > 1) {
+              crop = 'multi-icon';
             }
-            return L.circleMarker(ll, marker);
+            
+            if (cropLength === 1) {
+              cropType = f.properties.crop[0].type;
+              switch (cropType) {
+                case 'Lemons':
+                  crop = 'lemon-icon';
+                  break;
+                case 'Olives':
+                  crop = 'olive-icon';
+                  break;
+                case 'Medjool Dates':
+                  crop = 'date-icon';
+                  break;
+                case 'Apples':
+                  crop = 'apple-icon';
+                  break;
+                case 'Sweet Corn':
+                  crop = 'corn-icon';
+                  break;
+                case 'Chili Peppers':
+                  crop = 'pepper-icon';
+                  break;
+                case 'Anaheim Chilis':
+                  crop = 'pepper-icon';
+                  break;
+                case 'Viticultural Grapes':
+                  crop = '';
+                  break;
+                case 'Romaine Lettue':
+                  crop = 'lettuce-icon';
+                  break;
+                case 'Lavender':
+                  crop = 'lavender-icon';
+                  break;
+                case 'Pumpkins':
+                  crop = 'pumpkin-icon';
+                  break;
+                case 'Honey':
+                  crop = 'honey-icon';
+                  break;
+              }
+            }
+
+            icon = new L.divIcon({className: crop});
+            return L.marker(ll, {icon: icon});
           },
         }
       })
@@ -89,7 +131,7 @@ d3.json(app.serviceUrl, function (err, res) {
   }).render();
 
   app.routeView = new app.views.RouteView({
-    el: $("#get-directions").first(),
+    el: $("#get-content").first(),
     model: new app.models.Route({
       farmsData: res,
       lineOptions: {
