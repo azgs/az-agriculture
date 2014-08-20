@@ -123,43 +123,13 @@ d3.json(app.serviceUrl, function (err, res) {
       })
     }).render();
 
-  app.mapContentView = new app.views.MapContentView({
-    el: $('#map .leaflet-popup-pane'),
-    model: new app.models.MapContentView({
-      id: 'contentmodel',
-      data: res,
-    })
-  }).render();
-
-  app.routeView = new app.views.RouteView({
-    el: $("#get-content").first(),
-    model: new app.models.Route({
-      farmsData: res,
-      lineOptions: {
-        style: function (feature) {
-          var lineStyle = {
-            weight: 3,
-            opacity: 1,
-            color: "red",
-          };
-          return lineStyle;
-        }
-      },
-      circleOptions: {
-        pointToLayer: function (feature, latlng) {
-          markerOptions = {
-            radius: 5,
-            fillColor: "red",
-            color: "orange",
-            weight: 3,
-            opacity: 1,
-            fillOpacity: 1,
-          }
-        return L.circleMarker(latlng, markerOptions);
-        }
-      }
-    })
-  }).render();
+    app.mapContentView = new app.views.MapContentView({
+      el: $('#map .leaflet-popup-pane'),
+      model: new app.models.MapContentView({
+        id: 'contentmodel',
+        data: res,
+      })
+    }).render();
 
     var farmsTypeahead = _.map(res.features, function (f) {
       return {
@@ -169,7 +139,7 @@ d3.json(app.serviceUrl, function (err, res) {
         lng: f.geometry.coordinates[0],
       }
     })
-        
+
     app.typeaheadView = new app.views.TypeaheadView({
       model: new app.models.Typeahead({
         farmsTypeahead: farmsTypeahead,
