@@ -2,52 +2,6 @@ var root = this;
 root.app == null ? app = root.app = {} : app = root.app;
 app.views == null ? app.views = app.views = {} : app.views = app.views;
 
-app.views.FarmContentView = Backbone.View.extend({
-  initialize: function () {
-    this.template = _.template($('#render-content-template').html());    
-  },
-  render: function () {
-    return $(this.el).append(this.template({data: this.attributes}));
-  },
-  events: {
-    'click .farms-contact button': 'renderDirections',
-  },
-  renderDirections: function () {
-    var data = this.attributes;
-    $('.farms-content').empty();
-
-    app.routeView = new app.views.RouteView({
-      el: $('.farms-content'),
-      model: new app.models.Route({
-        farmsData: data,
-        lineOptions: {
-          style: function (feature) {
-            var lineStyle = {
-              weight: 3,
-              opacity: 1,
-              color: "red",
-            };
-            return lineStyle;
-          }
-        },
-        circleOptions: {
-          pointToLayer: function (feature, latlng) {
-            markerOptions = {
-              radius: 5,
-              fillColor: "red",
-              color: "orange",
-              weight: 3,
-              opacity: 1,
-              fillOpacity: 1,
-            }
-          return L.circleMarker(latlng, markerOptions);
-          }
-        }
-      })
-    }).render();
-  }
-});
-
 app.views.MapContentView = Backbone.View.extend({
   events : {
     'click button': 'configureContent',
@@ -75,10 +29,12 @@ app.views.MapContentView = Backbone.View.extend({
       }
     });
   },
-  renderContent: function (d) {
-    app.farmContentView = new app.views.FarmContentView({
-      el: $('#get-content').first(),
-      attributes: d
-    }).render();
+  renderContent: function (data) {
+    var parent
+      , template;
+
+    parent = $('#get-content').first();
+    template = _.template($('#render-content-template').html());
+    return parent.append(template({data: data}));
   }
 });
