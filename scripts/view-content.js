@@ -2,38 +2,25 @@ var root = this;
 root.app == null ? app = root.app = {} : app = root.app;
 app.views == null ? app.views = app.views = {} : app.views = app.views;
 
-app.views.MapContentView = Backbone.View.extend({
-  events : {
-    'click button': 'configureContent',
+app.views.FarmContentView = Backbone.View.extend({
+  initialize: function () {
+//    this.parent = $('#get-content').first();
+    this.template = _.template($('#render-content-template').html());    
   },
-  configureContent: function (e) {
-    var view = this;
-    var data = this.model.get('data');
-    var uid = e.currentTarget.id;
-    _.each(data.features, function (d) {
-      if (uid === String(d.properties.uid)) {
-        $('#feature-content-tab').remove();
-
-        view.renderContent(d);
-
-        $('.icon-bar').addClass('active');
-        $('.navbar-toggle').addClass('active');
-        $('#content-tab').addClass('active');
-
-        $('.tab-control > .btn-group > .btn').removeClass('active');
-        $('#get-content-btn').addClass('active');
-
-        $('#get-content').siblings().removeClass('active');
-        $('#get-content').addClass('active');
-      }
-    });
+  render: function () {
+    return $(this.el).append(this.template({data: this.attributes}));
   },
-  renderContent: function (data) {
-    console.log(data);
+  events: {
+    'click button': 'renderDirections',
+  },
+  renderDirections: function () {
+    var data = this.attributes;
+    $('#feature-content-tab > .content').empty();
+    
     app.routeView = new app.views.RouteView({
-      el: $("#get-content").first(),
+      el: $('#feature-content-tab .content'),
       model: new app.models.Route({
-        farmData: data,
+        farmsData: data,
         lineOptions: {
           style: function (feature) {
             var lineStyle = {
@@ -59,12 +46,37 @@ app.views.MapContentView = Backbone.View.extend({
         }
       })
     }).render();
+  }
+});
 
-    var parent = $('#get-content').first();
-    var template = _.template($('#render-content-template').html());
+app.views.MapContentView = Backbone.View.extend({
+  events : {
+    'click button': 'configureContent',
+  },
+  configureContent: function (e) {
+    var view = this
+      , data = this.model.get('data')
+      , uid = e.currentTarget.id;
 
-    return parent.append(template({
-      data: data,
-    }))
+    _.each(data.features, function (d) {
+      if (uid === String(d.properties.uid)) {
+        $('#feature-content-tab').remove();
+
+        app.farmContentView = new app.views.FarmContentView({
+          el: $('#get-content').first(),
+          attributes: d
+        }).render();
+
+        $('.icon-bar').addClass('active');
+        $('.navbar-toggle').addClass('active');
+        $('#content-tab').addClass('active');
+
+        $('.tab-control > .btn-group > .btn').removeClass('active');
+        $('#get-content-btn').addClass('active');
+
+        $('#get-content').siblings().removeClass('active');
+        $('#get-content').addClass('active');
+      }
+    });
   }
 });

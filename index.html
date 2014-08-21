@@ -89,40 +89,43 @@
 
     <script id="render-content-template" type="text/html">
       <div id="feature-content-tab">
-        <h4><%= data.properties.source %></h4>
-				<table class="table">
-					<tbody
-					<tr>
-						<td class="contact-info">
-							<%= data.properties.street %><br>
-							<%= data.properties.area %>, AZ<br>
-							<%= data.properties.phone %><br>
-							<%= data.properties.email %><br>
-						</td>
-						<td>
-							<input type="image" src="images/directions_sign.png" height="42" width="42" id='get-directions-btn' class="toDirection" href="#get-directions" data-toggle="tab" alt="alternative text" title="Get Directions" source="<%= data.properties.source %>"><br>
-							<a class="toDirection" href="#get-directions" data-toggle="tab" alt="alternative text" title="Get Directions" source="<%= data.properties.source %>">Directions</a></input>
-						</td>
-					</tr>
-					</tbody>
-				</table>
-        <%= data.properties.notes %>
-        <br>
-        <h5><strong>Products</strong></h5>
-          <ul>
-            <% _.each(data.properties.crop, function (crop) { %>
-              <li><%= crop["type"] %></li>
-            <% }); %>
-          </ul>
-        <h5><strong>Offerings</strong></h5>
-          <ul>
-            <% _.each(data.properties.store, function (store) { %>
-              <li><%= store %></li>
-            <% }); %>
-          </ul>
-				<strong>Hours of Operation:</strong><br>
-        <%= data.properties.hours %><br>
-				<h5><strong>Owner: </strong><%= data.properties.owner %></h5>
+        <div class="contact">
+          <h4><%= data.properties.source %></h4>
+          <table class="table">
+            <tbody
+            <tr>
+              <td class="contact-info">
+                <%= data.properties.street %><br>
+                <%= data.properties.area %>, AZ<br>
+                <%= data.properties.phone %><br>
+                <%= data.properties.email %><br>
+              </td>
+              <td>
+                <button type="button" class="btn btn-default">Directions</button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="content">
+          <%= data.properties.notes %>
+          <br>
+          <h5><strong>Products</strong></h5>
+            <ul>
+              <% _.each(data.properties.crop, function (crop) { %>
+                <li><%= crop["type"] %></li>
+              <% }); %>
+            </ul>
+          <h5><strong>Offerings</strong></h5>
+            <ul>
+              <% _.each(data.properties.store, function (store) { %>
+                <li><%= store %></li>
+              <% }); %>
+            </ul>
+          <strong>Hours of Operation:</strong><br>
+          <%= data.properties.hours %><br>
+          <h5><strong>Owner: </strong><%= data.properties.owner %></h5>
+        </div>
       </div>
     </script>
 
