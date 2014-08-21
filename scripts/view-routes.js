@@ -73,9 +73,15 @@ app.views.RouteView = Backbone.View.extend({
     this.template = _.template($("#get-directions-template").html());
   },
   render: function () {
-    var el = this.el,
-        template = this.template;
-    return $(el).append(template());
+    var el
+      , template
+      , farm;
+
+    el = this.el,
+    template = this.template;
+    farm = this.model.get('farmsData').properties.source;
+    $(el).append(template());
+    $('#geo-destination').val(farm);
   },
   events: {
     "submit": "getDirections",
@@ -92,7 +98,7 @@ app.views.RouteView = Backbone.View.extend({
       from: $("#geo-start").val(),
       to: $("#geo-destination").val(),
     };
-    directions.from = this.getLocation(directions.from);
+
     directions.to = this.getLocation(directions.to);
     this.route(directions);
     return false;
@@ -100,16 +106,18 @@ app.views.RouteView = Backbone.View.extend({
   // Get the lat/long for a selected location if the location 
   // matches a source location in the farms.json data
   getLocation:  function (location) {
-    farmsData = this.model.get('farmsData').features;
-    _.each(farmsData, function(farmData) {
-      if (farmData.properties.source == location)
-        location = farmData.properties.lat + ", " + farmData.properties.lon;
-    });
-    return location;
+    farmData = this.model.get('farmsData');
+    if (farmData.properties.source == location) {
+      location = farmData.properties.lat + ", " + farmData.properties.lon;
+      return location;
+    }
   },
   route: function (data, callback) {
-    var layers = this.model.get("layer"),
-        view = this;
+    var layers
+      , view;
+    
+    layers = this.model.get("layer"),
+    view = this;
     layers.clearLayers();
     this.model.createLayers();
     // Look into the JSON object and build GeoJSON features

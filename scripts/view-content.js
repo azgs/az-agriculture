@@ -15,7 +15,7 @@ app.views.FarmContentView = Backbone.View.extend({
   renderDirections: function () {
     var data = this.attributes;
     $('.farms-content').empty();
-    
+
     app.routeView = new app.views.RouteView({
       el: $('.farms-content'),
       model: new app.models.Route({
