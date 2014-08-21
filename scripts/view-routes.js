@@ -92,7 +92,6 @@ app.views.RouteView = Backbone.View.extend({
       to: $("#geo-destination").val(),
     };
 
-    directions.from = this.getLocation(directions.from);
     directions.to = this.getLocation(directions.to);
     this.route(directions);
     return false;

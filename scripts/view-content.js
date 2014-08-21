@@ -34,7 +34,32 @@ app.views.MapContentView = Backbone.View.extend({
       , template;
 
     parent = $('#get-content').first();
-    template = _.template($('#render-content-template').html());
-    return parent.append(template({data: data}));
+
+    app.views.FarmContentView = Backbone.View.extend({
+      render: function () {
+        template = _.template($('#render-content-template').html());
+        return $(this.el).append(template({data: data}));
+      },
+      events: {
+        'click button': 'toggleDirections',
+      },
+      toggleDirections: function () {
+        var farm;
+
+        $('.tab-control > .btn-group > .btn').removeClass('active');
+        $('#get-directions-btn').addClass('active');
+
+        $('#get-directions').siblings().removeClass('active');
+        $('#get-directions').addClass('active');
+
+        farm = this.attributes.properties.source;
+        $('#geo-destination').val(farm);
+      }
+    });
+
+    app.views.farmContentView = new app.views.FarmContentView({
+      el: parent,
+      attributes: data,
+    }).render();
   }
 });

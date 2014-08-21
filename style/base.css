@@ -187,6 +187,15 @@ h5.subtitle {
 	text-align: left;
 }
 
+#get-directions {
+  padding-top: 10px;
+}
+
+.panel {
+  border: none;
+  box-shadow: none;
+}
+
 @media(max-width:767px){
   #content-tab {
     position: absolute;
