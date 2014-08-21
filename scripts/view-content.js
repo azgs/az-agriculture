@@ -4,21 +4,20 @@ app.views == null ? app.views = app.views = {} : app.views = app.views;
 
 app.views.FarmContentView = Backbone.View.extend({
   initialize: function () {
-//    this.parent = $('#get-content').first();
     this.template = _.template($('#render-content-template').html());    
   },
   render: function () {
     return $(this.el).append(this.template({data: this.attributes}));
   },
   events: {
-    'click button': 'renderDirections',
+    'click .farms-contact button': 'renderDirections',
   },
   renderDirections: function () {
     var data = this.attributes;
-    $('#feature-content-tab > .content').empty();
+    $('.farms-content').empty();
     
     app.routeView = new app.views.RouteView({
-      el: $('#feature-content-tab .content'),
+      el: $('.farms-content'),
       model: new app.models.Route({
         farmsData: data,
         lineOptions: {
@@ -62,10 +61,7 @@ app.views.MapContentView = Backbone.View.extend({
       if (uid === String(d.properties.uid)) {
         $('#feature-content-tab').remove();
 
-        app.farmContentView = new app.views.FarmContentView({
-          el: $('#get-content').first(),
-          attributes: d
-        }).render();
+        view.renderContent(d);
 
         $('.icon-bar').addClass('active');
         $('.navbar-toggle').addClass('active');
@@ -78,5 +74,11 @@ app.views.MapContentView = Backbone.View.extend({
         $('#get-content').addClass('active');
       }
     });
+  },
+  renderContent: function (d) {
+    app.farmContentView = new app.views.FarmContentView({
+      el: $('#get-content').first(),
+      attributes: d
+    }).render();
   }
 });
