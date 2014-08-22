@@ -86,14 +86,24 @@ app.views.RouteView = Backbone.View.extend({
     layers.clearLayers();
   },
   getDirections: function () {
-    console.log('here');
-    var directions = {
+    var directions
+      , view;
+
+    view = this;
+    directions = {
       from: $("#geo-start").val(),
       to: $("#geo-destination").val(),
     };
 
-    directions.to = this.getLocation(directions.to);
-    this.route(directions);
+    if (directions.from = 'My location') {
+      this.getCurrentLocation(function (location) {
+        console.log(location)
+        directions.from = location;
+        directions.to = view.getLocation(directions.to);
+        view.route(directions);
+        return false;
+      });
+    }
     return false;
   },
   // Get the lat/long for a selected location if the location 
@@ -103,10 +113,19 @@ app.views.RouteView = Backbone.View.extend({
     farmsData = this.model.get('farmsData').features;
     _.each(farmsData, function (farm) {
       if (farm.properties.source === location) {
-        location = farmData.properties.lat + ", " + farmData.properties.lon;
+        location = farm.properties.lat + ", " + farm.properties.lon;
       }
     })
     return location;
+  },
+  getCurrentLocation: function (callback) {
+    var geo;
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(getLocation);
+      function getLocation (location) {
+        callback(location.coords.latitude + ", " + location.coords.longitude);
+      }
+    }
   },
   route: function (data, callback) {
     var layers
