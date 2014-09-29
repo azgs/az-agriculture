@@ -1,15 +1,17 @@
-var express = require("express");
-var fs = require("fs");
-var path = require("path");
+var express = require("express")
+  ,	fs = require("fs")
+  , path = require("path")
+  ;
 
 var app = express();
 
-var style = path.join(__dirname, "style");
-var script = path.join(__dirname, "scripts");
-var vendor = path.join(__dirname, "vendor");
-var images = path.join(__dirname, "images");
-var home = path.join(__dirname, "index.html");
-var farms = path.join(__dirname, "data", "farms.json");
+var style = path.join(__dirname, "style")
+  , script = path.join(__dirname, "scripts")
+  , vendor = path.join(__dirname, "vendor")
+  , images = path.join(__dirname, "images")
+  , home = path.join(__dirname, "index.html")
+  , farms = path.join(__dirname, "data", "farms.json")
+  ;
 
 app.use("/style", express.static(style));
 app.use("/scripts", express.static(script));

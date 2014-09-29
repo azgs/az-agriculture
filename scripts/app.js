@@ -64,65 +64,80 @@ d3.json(app.serviceUrl, function (err, res) {
         layerOptions: {
           pointToLayer: function (f, ll) {
             var icon
-              , image
+              , svg
+              , tag
               , cropLength
               , cropType;
             
             cropLength = f.properties.crop.length;
             
             if (cropLength > 1) {
-              crop = 'multi-icon';
+              svg = 'images/color-basket-icon.svg';
+              tag = 'multi-icon';
             }
             
             if (cropLength === 1) {
               cropType = f.properties.crop[0].type;
               switch (cropType) {
                 case 'Lemons':
-                  crop = '../images/color-lemon-icon.svg';
+                  svg = 'images/color-lemon.svg';
+                  tag = 'lemon-icon';
                   break;
                 case 'Olives':
-                  crop = 'olive-icon';
+                  svg = 'images/color-olive-icon.svg';
+                  tag = 'olive-icon';
                   break;
                 case 'Medjool Dates':
-                  crop = 'date-icon';
+                  svg = 'images/color-date-palm-icon.svg';
+                  tag = 'date-icon';
                   break;
                 case 'Dates':
-                  crop = 'date-icon';
+                  svg = 'images/color-date-palm-icon.svg';
+                  tag = 'date-icon';
                   break;
                 case 'Apples':
-                  crop = 'apple-icon';
+                  svg = 'images/color-apple-icon.svg';
+                  tag = 'apple-icon';
                   break;
                 case 'Sweet Corn':
-                  crop = 'corn-icon';
+                  svg = 'images/color-corn-icon.svg';
+                  tag = 'corn-icon';
                   break;
                 case 'Chili Peppers':
-                  crop = 'pepper-icon';
+                  svg = 'images/color-chili-pepper-icon.svg';
+                  tag = 'pepper-icon';
                   break;
                 case 'Anaheim Chilis':
-                  crop = 'pepper-icon';
+                  svg = 'images/color-chili-pepper-icon.svg';
+                  tag = 'pepper-icon';
                   break;
                 case 'Chilis':
-                  crop = 'pepper-icon';
+                  svg = 'images/color-chili-pepper-icon.svg';
+                  tag = 'pepper-icon';
                   break;
-                case 'Viticultural Grapes':
-                  crop = '';
-                  break;
-                case 'Romaine Lettue':
-                  crop = 'lettuce-icon';
+                case 'Romaine Lettuce':
+                  svg = 'images/color-romaine-lettuce-icon.svg';
+                  tag = 'lettuce-icon';
                   break;
                 case 'Lavender':
-                  crop = 'lavender-icon';
+                  svg = 'images/color-lavender-icon.svg';
+                  tag = 'lavender-icon';
                   break;
                 case 'Pumpkins':
-                  crop = 'pumpkin-icon';
+                  svg = 'images/color-pumpkin-icon.svg';
+                  tag = 'pumpkin-icon';
                   break;
                 case 'Honey':
-                  crop = 'honey-icon';
+                  svg = 'images/color-honey-icon.svg';
+                  tag = 'honey-icon';
                   break;
               }
             }
 
-            icon = new L.divIcon({className: crop});
+            icon = L.divIcon({
+              className: tag,
+              html: '<img src=' + svg + '>'
+            });
             return L.marker(ll, {icon: icon});
           },
         }
