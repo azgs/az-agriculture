@@ -64,7 +64,7 @@ d3.json(app.serviceUrl, function (err, res) {
         layerOptions: {
           pointToLayer: function (f, ll) {
             var icon
-              , crop
+              , image
               , cropLength
               , cropType;
             
@@ -78,12 +78,15 @@ d3.json(app.serviceUrl, function (err, res) {
               cropType = f.properties.crop[0].type;
               switch (cropType) {
                 case 'Lemons':
-                  crop = 'lemon-icon';
+                  crop = '../images/color-lemon-icon.svg';
                   break;
                 case 'Olives':
                   crop = 'olive-icon';
                   break;
                 case 'Medjool Dates':
+                  crop = 'date-icon';
+                  break;
+                case 'Dates':
                   crop = 'date-icon';
                   break;
                 case 'Apples':
@@ -96,6 +99,9 @@ d3.json(app.serviceUrl, function (err, res) {
                   crop = 'pepper-icon';
                   break;
                 case 'Anaheim Chilis':
+                  crop = 'pepper-icon';
+                  break;
+                case 'Chilis':
                   crop = 'pepper-icon';
                   break;
                 case 'Viticultural Grapes':

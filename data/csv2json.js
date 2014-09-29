@@ -10,7 +10,7 @@ function makeCrop (crop) {
   if (crop === "Olives") {
     return {"type": crop, "months": ["September", "October", "November", "December"], "seasons": ["Fall", "Winter"]};
   }
-  if (crop === "Medjool Dates") {
+  if (crop === "Medjool Dates" || crop === "Dates") {
     return {"type": crop, "months": ["September", "October", "November"], "seasons": ["Fall"]};
   }
   if (crop === "Apples") {
@@ -19,7 +19,7 @@ function makeCrop (crop) {
   if (crop === "Sweet Corn") {
     return {"type": crop, "months": ["July", "August", "September"], "seasons": ["Summer", "Fall"]};
   }
-  if (crop === "Chili Peppers" || crop === "Anaheim Chilis") {
+  if (crop === "Chili Peppers" || crop === "Anaheim Chilis" || crop === "Chilis") {
     return {"type": crop, "months": ["August", "September", "October", "November"], "seasons": ["Summer", "Fall"]};
   }
   if (crop === "Viticultural Grapes") {
@@ -78,7 +78,7 @@ function makeChild (obj) {
   }
 };
 
-var csvPath = path.join(__dirname, "upickfarmv1.csv");
+var csvPath = path.join(__dirname, "upickfarmv3.csv");
 var jsonPath = path.join(__dirname, "farms.json");
 
 var fileStream = fs.createReadStream(csvPath);

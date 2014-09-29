@@ -81,11 +81,8 @@ body {
   color: #008000;
 }
 
-.multi-icon:after {
-  font-family: "agriculture-icons";
-  content: "k";
-  font-size: 40px;
-  color: #a52a2a;
+.multi-icon {
+  background-image: url('../images/color-basket-icon.svg');
 }
 
 #map {
