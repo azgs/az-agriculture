@@ -96,6 +96,39 @@
       <div id="feature-content-tab">
         <div class="farms-contact">
           <h4><%= data.properties.source %></h4>
+
+          <% if (data.properties.images) { %>
+            <div id="slideshow" class="carousel slide" data-ride="carousel">
+              <ol class="carousel-indicators">
+                <% for (var j = 0; j < data.properties.images.length; j++) { %>
+                  <% var jimg = data.properties.images[j] %>
+                  <% if (jimg !== "" && j === 0) { %>
+                    <li data-target="#slideshow" data-slide-to=<%= j %> class="active"></li>
+                  <% } %>
+                  <% if (jimg !== "" && j > 0) { %>
+                    <li data-target="#slideshow" data-slide-to=<%= j %> ></li>
+                  <% } %>
+                <% } %>
+              </ol>
+
+              <div class="carousel-inner">
+                <% for (var i = 0; i < data.properties.images.length; i++) { %>
+                  <% var img = data.properties.images[i] %>
+                  <% if (img !== "" && i === 0) { %>
+                    <div class="item active">
+                      <img src=<%= "images/photos/" + img %> >
+                    </div>
+                  <% } %>
+                  <% if (img !== "" && i > 0) { %>
+                    <div class="item">
+                      <img src=<%= "images/photos/" + img %> >
+                    </div>
+                  <% } %>
+                <% } %>
+              </div>
+            </div>
+          <% } %>
+
           <table class="table">
             <tbody
             <tr>

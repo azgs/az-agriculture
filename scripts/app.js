@@ -198,3 +198,55 @@ d3.json(app.serviceUrl, function (err, res) {
     }).render();    
   }
 });
+
+
+
+
+
+
+
+// Create a global object to store all logic in
+var root = this;
+root.app == null ? app = root.app = {} : app = root.app;
+
+//app.serviceUrl = "http://localhost:3000/farms.json";
+app.serviceUrl = "http://159.87.39.12/az-agriculture/farms.json";
+
+app.intialExtent = L.latLngBounds(
+  [37.094259, -115.115688],
+  [31.282857, -108.875454]);
+
+app.maxBounds = L.latLngBounds(
+  [41.9023, -121.8164],
+  [24.6870, -99.668]);
+
+app.mapOptions = {
+  maxBounds: app.maxBounds,
+};
+
+app.width = window.innerWidth;
+if (app.width < 768) { app.mapOptions['zoomControl'] = false; };
+
+// Make a map
+app.map = L.map('map', app.mapOptions).fitBounds(app.intialExtent);
+
+if (app.width > 768) {
+  app.centerPoint = app.map.getPixelOrigin().x;
+  app.offset = app.centerPoint * 0.975;
+  app.pan = app.centerPoint - app.offset;
+  app.map.panBy([app.pan, 0]);
+  $('.icon-bar').addClass('active');
+  $('.navbar-toggle').addClass('active');
+  $('#content-tab').addClass('active');
+}
+
+// Instantiate basemap model/view
+app.baseMapView = new app.views.BaseMapView({
+  model: new app.models.TileLayer({
+    id: 'osm-basemap',
+    serviceUrl: 'http://a.tiles.mapbox.com/v3/azgs.map-qc1pcpws/{z}/{x}/{y}.png',
+    serviceType: 'WMS',
+    active: true,
+    detectRetina: true,
+  })
+}).render();

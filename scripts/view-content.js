@@ -31,14 +31,18 @@ app.views.MapContentView = Backbone.View.extend({
   },
   renderContent: function (data) {
     var parent
-      , template;
+      , template
+      , img
+      , i
+      ;
 
     parent = $('#get-content').first();
 
     app.views.FarmContentView = Backbone.View.extend({
       render: function () {
         template = _.template($('#render-content-template').html());
-        return $(this.el).append(template({data: data}));
+        $(this.el).append(template({data: data}));
+        $('.carousel').carousel({interval:2000});
       },
       events: {
         'click button': 'toggleDirections',

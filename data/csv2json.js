@@ -47,10 +47,16 @@ function makeParent (obj) {
 }
 
 function makeChild (obj) {
-  var crops = obj["Crop"].split(";");  
-  var cropSeasons = _.map(crops, function (crop) {
+  var crops
+    , cropSeasons
+    , images
+    ;
+
+  crops = obj["Crop"].split(";");  
+  cropSeasons = _.map(crops, function (crop) {
     return makeCrop(crop.trim());
   });
+  images = obj["Images"].split(";");
 
   return { 
     "type": "Feature",
@@ -74,6 +80,7 @@ function makeChild (obj) {
       "store": obj["You pick?"].split(";"),
       "hours": obj["Hours of operation"],
       "notes": obj["Notes"],
+      "images": images,
     }
   }
 };
