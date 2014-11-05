@@ -87,7 +87,8 @@ app.views.RouteView = Backbone.View.extend({
   },
   getDirections: function () {
     var directions
-      , view;
+      , view
+      ;
 
     view = this;
     directions = {
@@ -96,8 +97,7 @@ app.views.RouteView = Backbone.View.extend({
     };
 
     if (directions.from = 'My location') {
-      this.getCurrentLocation(function (location) {
-        console.log(location)
+      view.getCurrentLocation(function (location) {
         directions.from = location;
         directions.to = view.getLocation(directions.to);
         view.route(directions);
@@ -109,8 +109,7 @@ app.views.RouteView = Backbone.View.extend({
   // Get the lat/long for a selected location if the location 
   // matches a source location in the farms.json data
   getLocation:  function (location) {
-    var farmsData;
-    farmsData = this.model.get('farmsData').features;
+    var farmsData = this.model.get('farmsData').features;
     _.each(farmsData, function (farm) {
       if (farm.properties.source === location) {
         location = farm.properties.lat + ", " + farm.properties.lon;
@@ -119,12 +118,25 @@ app.views.RouteView = Backbone.View.extend({
     return location;
   },
   getCurrentLocation: function (callback) {
-    var geo;
+    var options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+    };
+
+    function success (pos) {
+      callback(pos.coords.latitude + ", " + pos.coords.longitude);
+    }
+
+    function error (err) {
+      console.log("ERROR(" + err.code + "): " + err.message);
+    }
+
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(getLocation);
-      function getLocation (location) {
-        callback(location.coords.latitude + ", " + location.coords.longitude);
-      }
+      navigator.geolocation.getCurrentPosition(success, error, options);
+    }
+    else {
+      alert("Please upgrade to a modern web browser which supports geolocation");
     }
   },
   route: function (data, callback) {
