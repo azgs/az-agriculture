@@ -13,7 +13,13 @@ This web map application showcases Arizona farm stands and U-pick farms which pr
 - Romaine Lettuce
 - Sweet Corn
 
-### Development Setup
+##Development Setup
+
+### Prerequisites
+
+    > [node.js](http://nodejs.org/)
+
+### Installation
 
     > npm install
 
