@@ -17,7 +17,7 @@ This web map application showcases Arizona farm stands and U-pick farms which pr
 
 ### Prerequisites
 
-    > [node.js](http://nodejs.org/)
+> [node.js](http://nodejs.org/)
 
 ### Installation
 
