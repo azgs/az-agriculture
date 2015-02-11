@@ -85,7 +85,7 @@ function makeChild (obj) {
   }
 };
 
-var csvPath = path.join(__dirname, "upickfarmv3.csv");
+var csvPath = path.join(__dirname, "upickfarmv.csv");
 var jsonPath = path.join(__dirname, "farms.json");
 
 var fileStream = fs.createReadStream(csvPath);
