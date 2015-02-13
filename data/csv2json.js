@@ -71,8 +71,8 @@ function makeChild (obj) {
       "source": obj["Farm/Grower"],
       "street": obj["Location"],
       "area": obj["Area"],
-      "lat": parseFloat(obj["Lat"]),
       "lon": parseFloat(obj["Long"]),
+      "lat": parseFloat(obj["Lat"]),
       "owner": obj["Owner"],
       "website": obj["Website"],
       "phone": obj["Contact"],
@@ -85,7 +85,7 @@ function makeChild (obj) {
   }
 };
 
-var csvPath = path.join(__dirname, "upickfarmv.csv");
+var csvPath = path.join(__dirname, "upickfarms.csv");
 var jsonPath = path.join(__dirname, "farms.json");
 
 var fileStream = fs.createReadStream(csvPath);
