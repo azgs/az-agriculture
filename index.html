@@ -180,10 +180,20 @@
         <div class="panel-body">
           <form role="form">
             <div class="form-group">
-              <input type="text" class="form-control" id="geo-start" value="My location">
+               <div class="input-group">
+                  <input type="text" class="form-control" id="geo-start" placeholder="Enter starting location ... ">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" onclick="setMyLocation('from');">Here</button>
+                  </span>
+              </div>
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" id="geo-destination" placeholder="Enter destination">
+              <div class="input-group">
+                <input type="text" class="form-control" id="geo-destination" placeholder="Enter destination ...">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button" onclick="setMyLocation('to');">Here</button>
+                </span>
+              </div>
             </div>
 						<div class="btn-group btn-group-justified">
 							<div class="btn-group">
@@ -226,6 +236,15 @@
 					<% } %>
 				<div style="clear: both;"></div>
       </li>
+    </script>
+
+    <script type="text/javascript">
+      function setMyLocation(dir) {
+        if (dir == 'from')
+          $('#geo-start').val('My location');
+        if (dir == 'to')
+          $('#geo-destination').val('My location');
+      }
     </script>
 
   	<script src="vendor/leaflet-0.7.2.js"></script>
