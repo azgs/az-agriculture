@@ -96,13 +96,27 @@ app.views.RouteView = Backbone.View.extend({
       to: $("#geo-destination").val(),
     };
 
-    if (directions.from = 'My location') {
+    if (directions.from == 'My location') {
       view.getCurrentLocation(function (location) {
         directions.from = location;
         directions.to = view.getLocation(directions.to);
         view.route(directions);
         return false;
       });
+    }
+    else if (directions.to == 'My location') {
+      view.getCurrentLocation(function (location) {
+        directions.from = view.getLocation(directions.from);
+        directions.to = location;
+        view.route(directions);
+        return false;
+      });
+    }
+    else {
+      directions.from = view.getLocation(directions.from);
+      directions.to = view.getLocation(directions.to);
+      view.route(directions);
+      return false;
     }
     return false;
   },
