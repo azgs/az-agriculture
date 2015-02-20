@@ -2,6 +2,17 @@ var root = this;
 root.app == null ? app = root.app = {} : app = root.app;
 app.views == null ? app.views = app.views = {} : app.views = app.views;
 
+
+app.views.NoContentView = Backbone.View.extend({      
+  initialize: function () {
+    var view = this;
+    this.template = _.template($("#content-template").html());
+  },
+  render: function () {
+    return $(this.el).append(this.template());
+  }
+})
+
 app.views.MapContentView = Backbone.View.extend({
   events : {
     'click button': 'configureContent',
@@ -40,6 +51,7 @@ app.views.MapContentView = Backbone.View.extend({
 
     app.views.FarmContentView = Backbone.View.extend({
       render: function () {
+        $("#no-content-tab").remove()
         template = _.template($('#render-content-template').html());
         $(this.el).append(template({data: data}));
         $('.carousel').carousel({interval:2000});

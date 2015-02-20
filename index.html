@@ -92,9 +92,16 @@
       </div>
     </script>
 
+    <script id="content-template" type="text/html">
+      <div id="no-content-tab">
+         Click on a farm on the map to see its detail here.
+      </div>
+    </script>
+
     <script id="render-content-template" type="text/html">
       <div id="feature-content-tab">
         <div class="farms-contact">
+        
           <h4><%= data.properties.source %></h4>
 
           <% if (data.properties.images) { %>

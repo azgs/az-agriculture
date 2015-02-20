@@ -2,7 +2,7 @@
 var root = this;
 root.app == null ? app = root.app = {} : app = root.app;
 
-app.serviceUrl = "http://localhost:3000/farms.json";
+app.serviceUrl = "http://az-agriculture-jessica-azgs.c9.io/farms.json";
 //app.serviceUrl = "http://159.87.39.12/az-agriculture/farms.json";
 
 app.intialExtent = L.latLngBounds(
@@ -143,7 +143,11 @@ d3.json(app.serviceUrl, function (err, res) {
         }
       })
     }).render();
-
+    
+    app.noContentView = new app.views.NoContentView({
+      el: $('#get-content').first()
+    }).render();
+    
     app.mapContentView = new app.views.MapContentView({
       el: $('#map .leaflet-popup-pane'),
       model: new app.models.MapContentView({
