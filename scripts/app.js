@@ -91,10 +91,6 @@ d3.json(app.serviceUrl, function (err, res) {
                   svg = 'images/color-date-palm-icon.svg';
                   tag = 'date-icon';
                   break;
-                case 'Dates':
-                  svg = 'images/color-date-palm-icon.svg';
-                  tag = 'date-icon';
-                  break;
                 case 'Apples':
                   svg = 'images/color-apple-icon.svg';
                   tag = 'apple-icon';
@@ -104,14 +100,6 @@ d3.json(app.serviceUrl, function (err, res) {
                   tag = 'corn-icon';
                   break;
                 case 'Chili Peppers':
-                  svg = 'images/color-chili-pepper-icon.svg';
-                  tag = 'pepper-icon';
-                  break;
-                case 'Anaheim Chilis':
-                  svg = 'images/color-chili-pepper-icon.svg';
-                  tag = 'pepper-icon';
-                  break;
-                case 'Chilis':
                   svg = 'images/color-chili-pepper-icon.svg';
                   tag = 'pepper-icon';
                   break;
