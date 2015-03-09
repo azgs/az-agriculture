@@ -228,6 +228,7 @@ h5.subtitle {
     background-color: #47a447;
     border-color: #398439;
     color: #fff;
+    padding: 5px;
   }
 	
 	#get-directions {
@@ -347,6 +348,7 @@ h5.subtitle {
     background-color: #47a447;
     border-color: #398439;
     color: #fff;
+    padding: 5px;
   }
   
   .navbar-header {
