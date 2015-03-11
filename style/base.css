@@ -110,6 +110,14 @@ h5.subtitle {
 	text-align: left;
 }
 
+#item  {
+  height: 350px; 
+}
+
+#itemactive {
+  height: 350px;
+}
+
 #get-directions {
   padding-top: 10px;
 }

@@ -124,12 +124,12 @@
                   <% var img = data.properties.images[i] %>
                   <% if (img !== "" && i === 0) { %>
                     <div class="item active">
-                      <img src=<%= "images/photos/" + img %> >
+                      <img src=<%= "images/photos/" + img %> id="itemactive" >
                     </div>
                   <% } %>
                   <% if (img !== "" && i > 0) { %>
-                    <div class="item">
-                      <img src=<%= "images/photos/" + img %> >
+                    <div class="item" >
+                      <img src=<%= "images/photos/" + img %> id="item" >
                     </div>
                   <% } %>
                 <% } %>
