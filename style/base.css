@@ -69,9 +69,19 @@ h5.subtitle {
 	font-style: italic;
 }
 
+.directions-btn {
+  vertical-align: top;
+}
+
+.location-hints  {
+  display: none;
+  font-size: smaller;
+  font-style: italic;
+}
+
 /* Typeahead */
 .twitter-typeahead { 
-	width: 100%; 
+	width: 100%;
 }
 .typeahead {
 	background-color: #FFFFFF;
